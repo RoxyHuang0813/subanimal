@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="LOGO" class="logo">
-    <style>
-        .logo {
-            display: block;
-            margin: 0 auto;
-            width: 150px;  /* 調整 LOGO 大小 */
-            height: auto;
-        }
-    </style>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>測驗結果</title>
@@ -26,11 +16,20 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            flex-direction: column; /* 讓內容垂直排列 */
+            text-align: center;
+        }
+
+        .logo {
+            width: 150px;  /* 調整 LOGO 大小 */
+            height: auto;
+            margin-bottom: 1px; /* LOGO 和下面內容之間的間距 */
         }
 
         .result-card {
             background-color: #FFECB3; /* 淺黃色背景 */
             max-width: 600px;
+            width: 100%;  /* 使內容佔滿可用寬度 */
             margin: 30px auto;
             padding: 30px;
             text-align: center;
@@ -70,9 +69,37 @@
         .btn-secondary:hover {
             background-color: #FF5722; /* 橙色 hover 效果 */
         }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .logo {
+                width: 120px;  /* 手機版時縮小 LOGO */
+            }
+
+            .result-card {
+                padding: 20px;  /* 手機版時減少卡片的內邊距 */
+                max-width: 90%;  /* 減小卡片寬度，使其在手機上更好顯示 */
+            }
+
+            h1 {
+                font-size: 2rem;  /* 手機版時減小標題字體 */
+            }
+
+            p {
+                font-size: 1rem;  /* 手機版時減小段落字體 */
+            }
+
+            .btn-secondary {
+                font-size: 1rem;  /* 手機版時減小按鈕字體 */
+                padding: 8px 20px;  /* 減小按鈕大小 */
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- LOGO 放在上面 -->
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="LOGO" class="logo">
+    
     <div class="result-card">
         <h2>你的金錢動物原型是...</h2>
         <!-- 顯示動物圖片 -->
