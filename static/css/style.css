@@ -1,0 +1,95 @@
+/* Reset一些基本樣式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 全頁面背景色 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 標題樣式 */
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 20px;
+}
+
+/* 設置圖片的樣式 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* 設定表單元素的樣式 */
+form {
+    width: 60%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 每個選項的樣式 */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+/* 提交按鈕樣式 */
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心理測驗</title>
+    <!-- 引入 CSS 文件 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>心理測驗</h1>
+    <p>問題 {{ progress }} / {{ total }}</p>
+    
+    <!-- 加入圖片 -->
+    <img src="{{ url_for('static', filename='images/your_image.jpg') }}" alt="心理測驗圖片">
+
+    <h2>{{ question }}</h2>
+    <form method="POST">
+        {% for option in options %}
+            <div>
+                <input type="radio" id="{{ option['text'] }}" name="animal_type" value="{{ option['type'] }}" required>
+                <label for="{{ option['text'] }}">{{ option['text'] }}</label>
+            </div>
+        {% endfor %}
+        <button type="submit">提交</button>
+    </form>
+    <p>進度：{{ progress }} / {{ total }}</p>
+</body>
+</html>
