@@ -8,23 +8,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const bgMusic = document.getElementById('bg-music');
     const audioPrompt = document.getElementById('audio-prompt');
 
-    // 統一音量控制 (30%)
-    bgMusic.volume = 0.3;
-    typeSound.volume = 0.3;
+    // 統一音量控制 (60%)
+    bgMusic.volume = 0.6;
+    typeSound.volume = 0.6;
 
-    // 檢查背景音樂是否被阻止
-    bgMusic.play().catch(() => {
-        // 如果被阻止，顯示提示訊息
-        audioPrompt.style.display = 'block';
-    });
-
-    // 用戶互動後啟用音效
-    const enableAudio = () => {
-        bgMusic.muted = false; // 取消靜音
-        audioPrompt.style.display = 'none'; // 隱藏提示訊息
+    // 嘗試自動播放背景音樂
+    const playBackgroundMusic = () => {
+        bgMusic.play()
+            .then(() => {
+                console.log("背景音樂自動播放成功");
+                audioPrompt.style.display = 'none'; // 隱藏提示訊息
+            })
+            .catch((error) => {
+                console.log("背景音樂自動播放被阻止：", error);
+                audioPrompt.style.display = 'block'; // 顯示提示訊息
+            });
     };
 
-    // 點擊或觸摸頁面後啟用音效
+    // 進入頁面時嘗試播放音樂
+    playBackgroundMusic();
+
+    // 用戶互動後重新嘗試播放音樂
+    const enableAudio = () => {
+        bgMusic.play()
+            .then(() => {
+                console.log("背景音樂播放成功");
+                audioPrompt.style.display = 'none'; // 隱藏提示訊息
+            })
+            .catch((error) => {
+                console.log("背景音樂播放失敗：", error);
+            });
+    };
+
+    // 點擊或觸摸頁面後重新嘗試播放音樂
     document.body.addEventListener('click', enableAudio);
     document.body.addEventListener('touchstart', enableAudio);
 

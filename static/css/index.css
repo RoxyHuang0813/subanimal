@@ -110,22 +110,55 @@ body {
     background: #6b4421; /* 深色木紋 */
 }
 
-/* 響應式設計：手機版 */
+/* 手機版專用樣式調整 */
 @media (max-width: 768px) {
-    .forest-container {
-        justify-content: flex-start; /* 手機版動畫靠上對齊 */
+    .result-card {
+      padding: 1rem;
+      margin-top: 20px;
     }
-
-    #forest-video {
-        object-fit: contain; /* 手機版動畫完整顯示 */
+  
+    .animal-image {
+      width: 70vw;
+      max-width: 250px;
     }
-
-    .dialogue-box {
-        max-width: 90%; /* 手機版對話框更寬 */
-        font-size: 1rem; /* 手機版字體稍小 */
+  
+    h1.animal-title {
+      font-size: 1.8rem;
+      padding: 0 0.5rem;
     }
-
-    .start-btn {
-        font-size: 1rem; /* 手機版按鈕字體稍小 */
+  
+    h1.animal-title::before,
+    h1.animal-title::after {
+      width: 20px;
     }
-}
+  
+    h1.animal-title::before {
+      left: -30px;
+    }
+  
+    h1.animal-title::after {
+      right: -30px;
+    }
+  
+    .teacher-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .teacher-img {
+      width: 80px;
+      margin: 0 0 1rem 0;
+    }
+  
+    .teacher-dialogue {
+      max-width: 90%;
+      font-size: 0.95rem;
+      padding: 10px;
+      text-align: center;
+    }
+  
+    .btn-secondary {
+      padding: 10px 25px;
+      font-size: 1rem;
+    }
+  }
