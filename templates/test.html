@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="LOGO" class="logo">
-    <style>
-        .logo {
-            display: block;
-            margin: 0 auto;
-            width: 150px;  /* 調整 LOGO 大小 */
-            height: auto;
-        }
-    </style>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>金錢動物測驗</title>
     <!-- 引入 Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to right, #FBE9E7, #FFEBEE); /* 柔和的粉色漸層背景 */
+            background: url("{{ url_for('static', filename='images/forest-bg.jpg') }}") no-repeat center center/cover; /* 森林背景圖 */
             color: #333;  /* 黑色文字 */
-            font-family: 'Arial', sans-serif;
+            font-family: 'Noto Sans TC', sans-serif; /* 使用 Google Fonts 字型 */
             padding: 30px;
             display: flex;
             flex-direction: column;
@@ -29,18 +21,27 @@
             min-height: 100vh;
         }
 
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            width: 150px;  /* 調整 LOGO 大小 */
+            height: auto;
+        }
+
         h1 {
             font-size: 3rem;
             font-weight: bold;
-            color: #FF4081; /* 粉紅色 */
+            color: #4CAF50; /* 森林綠色 */
             text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 文字陰影 */
         }
 
         h2 {
             font-size: 2rem;
-            color: #FF7043; /* 柔和的橙色 */
+            color: #2E7D32; /* 深綠色 */
             margin-bottom: 20px;
             text-align: center; /* 題目置中 */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* 文字陰影 */
         }
 
         p {
@@ -50,13 +51,14 @@
         }
 
         .question-form {
-            background-color: #FFF3E0; /* 淺橙色背景 */
-            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
+            border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin-top: 30px;
             width: 100%;
             max-width: 500px; /* 限制表單寬度 */
+            border: 2px solid #8B5A2B; /* 木紋邊框 */
         }
 
         .form-check {
@@ -74,7 +76,7 @@
         }
 
         button {
-            background-color: #FF80AB; /* 柔和的粉紅色 */
+            background-color: #8B5A2B; /* 木紋顏色 */
             color: #fff;
             padding: 10px 20px;
             font-size: 1.2rem;
@@ -84,18 +86,27 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 按鈕陰影 */
         }
 
         button:hover {
-            background-color: #FF4081; /* 更深的粉紅色 */
+            background-color: #6B4421; /* 深色木紋 */
         }
 
         button:focus {
             outline: none;
         }
+
+        /* 進度條樣式 */
+        .progress-text {
+            font-size: 1rem;
+            color: #2E7D32; /* 深綠色 */
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="LOGO" class="logo">
     <h1>金錢動物測驗</h1>
     <p>問題 {{ progress }} / {{ total }}</p>
     <h2>{{ question }}</h2>
@@ -108,6 +119,6 @@
         {% endfor %}
         <button type="submit">提交</button>
     </form>
-    <p>進度：{{ progress }} / {{ total }}</p>
+    <p class="progress-text">進度：{{ progress }} / {{ total }}</p>
 </body>
 </html>

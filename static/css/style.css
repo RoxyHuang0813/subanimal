@@ -7,10 +7,10 @@
 
 /* 全頁面背景色 */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-    line-height: 1.6;
+    background: url('/static/images/forest-bg.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #FFD700; /* 明亮黃 */
+    font-family: 'Arial', sans-serif;
 }
 
 /* 標題樣式 */
@@ -62,6 +62,12 @@ button {
 
 button:hover {
     background-color: #2980b9;
+}
+
+#animation-container {
+    max-width: 80%;
+    max-height: 500px;  /* 避免超出螢幕 */
+    margin: 0 auto;
 }
 
 <!DOCTYPE html>

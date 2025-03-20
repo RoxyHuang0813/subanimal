@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 import random
-
+from waitress import serve
 
 app = Flask(__name__)
 app.secret_key = 'your_secure_key_123'  # 正式環境請用更複雜的金鑰
@@ -13,7 +13,6 @@ ANIMALS = {
     'wolf': '狼型',
     'peacock': '孔雀型'
 }
-
 QUESTIONS = [
     {
         'question': '看到限量商品，你的第一反應是？',
@@ -191,5 +190,6 @@ def result():
                           animal=result_type,
                           animal_name=ANIMALS[result_type])
 
+    
 if __name__ == '__main__':
     app.run(debug=True)

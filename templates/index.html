@@ -6,68 +6,56 @@
     <title>金錢動物測驗首頁</title>
     <!-- 引入 Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            /* 漸層背景 */
-            background: linear-gradient(to right, #FFEB3B, #FF9800);
-            color: #333;
-            font-family: Arial, sans-serif;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column; /* 讓內容垂直排列 */
-            text-align: center;
-        }
-
-        .logo {
-            width: 350px;  /* 調整 LOGO 大小 */
-            height: auto;
-            margin-bottom: 20px; /* LOGO 和下面內容之間的間距 */
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        p {
-            font-size: 1.5rem;
-            color: #fff;
-        }
-
-        .start-btn {
-            background-color: #FF5722;
-            color: #fff;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            text-decoration: none;
-            border-radius: 30px; /* 圓角按鈕 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .start-btn:hover {
-            background-color: #FF7043;
-            transform: translateY(-3px); /* 當鼠標懸停時，按鈕上升效果 */
-        }
-
-        .start-btn:active {
-            background-color: #E64A19;
-            transform: translateY(1px); /* 點擊按鈕時，按鈕下沉效果 */
-        }
-    </style>
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 <body>
-    <div>
-        <!-- LOGO 放在上面 -->
+    <!-- 背景音樂 -->
+    <audio id="bg-music" loop muted autoplay>
+        <source src="{{ url_for('static', filename='sounds/background-music.mp3') }}" type="audio/mp3">
+        您的瀏覽器不支援音效播放
+    </audio>
+
+    <!-- 提示訊息 -->
+    <div id="audio-prompt" style="position: fixed; top: 10px; left: 10px; background: rgba(255, 255, 255, 0.9); padding: 10px; border-radius: 5px; display: none;">
+        點擊頁面以啟用音效
+    </div>
+
+    <!-- 森林動畫區 -->
+    <div id="forest-animation" class="forest-container">
+        <video autoplay muted id="forest-video">
+            <source src="{{ url_for('static', filename='videos/forest.mp4') }}" type="video/mp4">
+            您的瀏覽器不支援影片播放
+        </video>
+    </div>
+
+    <!-- 大K老師與森林背景區 -->
+    <div id="main-section" class="main-container">
+        <!-- 保留 LOGO -->
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="LOGO" class="logo">
 
-        <h1>歡迎光臨金錢動物原型測試</h1>
-        <p>開始測驗，了解你的金錢動物！</p>
+        <!-- 大K老師 -->
+        <div class="character">
+            <img src="{{ url_for('static', filename='images/teacher_k.png') }}" 
+                 alt="大K老師" 
+                 class="character-img">
+        </div>
+
+        <!-- 對話框 -->
+        <div class="dialogue-box">
+            <p class="dialogue-text"></p>
+        </div>
+
         <!-- 測驗按鈕 -->
-        <a href="{{ url_for('test') }}" class="start-btn">開始測驗</a>
+        <div id="quiz-section" class="quiz-container">
+            <a href="/test" class="start-btn">開始測驗</a>
+        </div>
     </div>
+
+    <!-- 引入 JavaScript -->
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <!-- 引入打字音效 -->
+    <audio id="type-sound" src="{{ url_for('static', filename='sounds/type.wav') }}"></audio>
 </body>
 </html>

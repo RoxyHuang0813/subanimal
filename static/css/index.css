@@ -1,0 +1,131 @@
+/* static/css/index.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans TC', sans-serif; /* 使用 Google Fonts 字型 */
+    background: #f9f7e8; /* 明亮的黃色背景 */
+    color: #333;
+    overflow: hidden;
+}
+
+/* 保留 LOGO 樣式 */
+.logo {
+    width: 350px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* 森林動畫區 */
+.forest-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    overflow: hidden;
+    background: #000; /* 避免動畫周圍露出空白 */
+}
+
+#forest-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 確保動畫填滿螢幕 */
+}
+
+/* 大K老師與森林背景區 */
+.main-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* 初始隱藏 */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url('../images/forest-bg.jpg') no-repeat center center/cover; /* 森林背景圖 */
+    z-index: 20;
+    opacity: 0; /* 初始透明 */
+    transition: opacity 1s ease-in-out; /* 漸變效果 */
+}
+
+.character-img {
+    width: 200px;
+    height: auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* 對話框 */
+.dialogue-box {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid #8b5a2b; /* 木紋邊框 */
+    font-family: 'Noto Sans TC', sans-serif; /* 使用 Google Fonts 字型 */
+    max-width: 80%; /* 根據螢幕寬度調整 */
+    width: 400px; /* 最大寬度 */
+}
+
+.dialogue-text {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    white-space: pre-wrap; /* 允許換行 */
+    overflow: hidden;
+    border-right: 2px solid #000; /* 打字游標效果 */
+}
+
+/* 測驗按鈕區 */
+.quiz-container {
+    margin-top: 20px;
+}
+
+.start-btn {
+    background: #8b5a2b; /* 木紋顏色 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    font-family: 'Noto Sans TC', sans-serif; /* 使用 Google Fonts 字型 */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.start-btn:hover {
+    background: #6b4421; /* 深色木紋 */
+}
+
+/* 響應式設計：手機版 */
+@media (max-width: 768px) {
+    .forest-container {
+        justify-content: flex-start; /* 手機版動畫靠上對齊 */
+    }
+
+    #forest-video {
+        object-fit: contain; /* 手機版動畫完整顯示 */
+    }
+
+    .dialogue-box {
+        max-width: 90%; /* 手機版對話框更寬 */
+        font-size: 1rem; /* 手機版字體稍小 */
+    }
+
+    .start-btn {
+        font-size: 1rem; /* 手機版按鈕字體稍小 */
+    }
+}
