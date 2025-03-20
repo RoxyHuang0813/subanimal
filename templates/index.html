@@ -4,17 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>金錢動物測驗首頁</title>
-    <!-- 引入 Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- 引入 Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <style>
+      #loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #8B5A2B;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
 </head>
 <body>
+    <!-- 載入動畫 -->
+    <div id="loader">
+      <div class="spinner"></div>
+    </div>
+
     <!-- 背景音樂 -->
-    <audio id="bg-music" loop autoplay>
+    <audio id="bg-music" loop>
         <source src="{{ url_for('static', filename='sounds/background-music.mp3') }}" type="audio/mp3">
-        您的瀏覽器不支援音效播放
     </audio>
 
     <!-- 提示訊息 -->
@@ -24,38 +52,33 @@
 
     <!-- 森林動畫區 -->
     <div id="forest-animation" class="forest-container">
-        <video autoplay muted id="forest-video">
+        <div class="skip-animation">跳過動畫 ▶</div>
+        <video autoplay muted playsinline id="forest-video" preload="auto">
             <source src="{{ url_for('static', filename='videos/forest.mp4') }}" type="video/mp4">
-            您的瀏覽器不支援影片播放
         </video>
     </div>
 
-    <!-- 大K老師與森林背景區 -->
+    <!-- 主內容區 -->
     <div id="main-section" class="main-container">
-        <!-- 保留 LOGO -->
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="LOGO" class="logo">
-
-        <!-- 大K老師 -->
+        <img src="{{ url_for('static', filename='images/logo.png') }}" 
+             alt="LOGO" 
+             class="logo"
+             onload="console.log('LOGO loaded')"
+             onerror="console.error('LOGO load failed')">
         <div class="character">
             <img src="{{ url_for('static', filename='images/teacher_k.png') }}" 
                  alt="大K老師" 
                  class="character-img">
         </div>
-
-        <!-- 對話框 -->
         <div class="dialogue-box">
             <p class="dialogue-text"></p>
         </div>
-
-        <!-- 測驗按鈕 -->
         <div id="quiz-section" class="quiz-container">
             <a href="/test" class="start-btn">開始測驗</a>
         </div>
     </div>
 
-    <!-- 引入 JavaScript -->
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-    <!-- 引入打字音效 -->
     <audio id="type-sound" src="{{ url_for('static', filename='sounds/type.wav') }}"></audio>
 </body>
 </html>

@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, make_response
 import random
 from waitress import serve
 
 app = Flask(__name__)
-app.secret_key = 'your_secure_key_123'  # 正式環境請用更複雜的金鑰
+app.secret_key = 'your_secure_key_123'
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # 新增安全設定
 
 ANIMALS = {
     'squirrel': '松鼠型',
@@ -150,46 +151,73 @@ QUESTIONS = [
 
 @app.route('/')
 def index():
+    # 初始化會話
     session.clear()
+    session['answers'] = []
+    session['current_index'] = 0
+    session.modified = True
     return render_template('index.html')
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
+    # 確保會話初始化
     if 'answers' not in session:
         session['answers'] = []
-    
+        session['current_index'] = 0
+        session.modified = True
+
+    # 處理表單提交
     if request.method == 'POST':
         selected_type = request.form.get('animal_type')
-        session['answers'].append(selected_type)
-        session.modified = True
-    
-    if len(session['answers']) >= len(QUESTIONS):
-        return redirect('/result')
-    
-    current_q = QUESTIONS[len(session['answers'])]
+        if selected_type:
+            session['answers'].append(selected_type)
+            session['current_index'] += 1
+            session.modified = True
+            return redirect(url_for('test'))
+
+    # 檢查是否完成所有問題
+    if session['current_index'] >= len(QUESTIONS):
+        return redirect(url_for('result'))
+
+    # 獲取當前問題
+    current_q = QUESTIONS[session['current_index']]
     random.shuffle(current_q['options'])
-    
-    return render_template('test.html',
-                         question=current_q['question'],
-                         options=current_q['options'],
-                         progress=len(session['answers'])+1,
-                         total=len(QUESTIONS))
+
+    # 創建響應對象並設置緩存頭
+    response = make_response(render_template(
+        'test.html',
+        question=current_q['question'],
+        options=current_q['options'],
+        progress=session['current_index'] + 1,
+        total=len(QUESTIONS)
+    ))
+    response.headers['Cache-Control'] = 'no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 @app.route('/result')
 def result():
+    # 檢查是否完成所有問題
     if 'answers' not in session or len(session['answers']) != len(QUESTIONS):
-        return redirect('/')
-    
+        return redirect(url_for('index'))
+
+    # 計算結果
     counts = {}
     for animal in session['answers']:
         counts[animal] = counts.get(animal, 0) + 1
-    
     result_type = max(counts, key=lambda k: counts[k])
-    
-    return render_template('result.html',
-                          animal=result_type,
-                          animal_name=ANIMALS[result_type])
 
-    
+    # 創建響應對象並設置緩存頭
+    response = make_response(render_template(
+        'result.html',
+        animal=result_type,
+        animal_name=ANIMALS[result_type]
+    ))
+    response.headers['Cache-Control'] = 'no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
+
 if __name__ == '__main__':
     app.run(debug=True)

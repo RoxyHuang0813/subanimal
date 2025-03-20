@@ -1,164 +1,312 @@
 /* static/css/index.css */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Noto Sans TC', sans-serif; /* 使用 Google Fonts 字型 */
-    background: #f9f7e8; /* 明亮的黃色背景 */
-    color: #333;
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans TC', sans-serif; /* 使用 Google Fonts 字型 */
+  background: #f9f7e8; /* 明亮的黃色背景 */
+  color: #333;
+  overflow: hidden;
 }
+
+/* static/css/index.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans TC', sans-serif;
+  background: #f9f7e8;
+  color: #333;
+  overflow: hidden;
+}
+
+.forest-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  background: #000;
+}
+
+#forest-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.main-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url('../images/forest-bg.jpg') no-repeat center center/cover;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.main-container.active {
+  opacity: 1;
+}
+
+.skip-animation {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: rgba(255,255,255,0.8);
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 1px solid #8b5a2b;
+}
+
+/* 其他原有樣式保持不變... */
+
+
 
 /* 保留 LOGO 樣式 */
 .logo {
-    width: 350px;
-    height: auto;
-    margin-bottom: 20px;
+  width: 350px;
+  height: auto;
+  margin-bottom: 20px;
 }
 
 /* 森林動畫區 */
 .forest-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-    overflow: hidden;
-    background: #000; /* 避免動畫周圍露出空白 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  overflow: hidden;
+  background: #000; /* 避免動畫周圍露出空白 */
 }
 
 #forest-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* 確保動畫填滿螢幕 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 確保動畫填滿螢幕 */
 }
 
 /* 大K老師與森林背景區 */
 .main-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none; /* 初始隱藏 */
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: url('../images/forest-bg.jpg') no-repeat center center/cover; /* 森林背景圖 */
-    z-index: 20;
-    opacity: 0; /* 初始透明 */
-    transition: opacity 1s ease-in-out; /* 漸變效果 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* 初始隱藏 */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url('../images/forest-bg.jpg') no-repeat center center/cover; /* 森林背景圖 */
+  z-index: 20;
+  opacity: 0; /* 初始透明 */
+  transition: opacity 1s ease-in-out; /* 漸變效果 */
 }
 
 .character-img {
-    width: 200px;
-    height: auto;
-    animation: float 3s ease-in-out infinite;
+  width: 200px;
+  height: auto;
+  animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 /* 對話框 */
 .dialogue-box {
-    background: rgba(255, 255, 255, 0.9);
-    color: #333;
-    padding: 20px;
-    border-radius: 15px;
-    margin-top: 20px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    border: 2px solid #8b5a2b; /* 木紋邊框 */
-    font-family: 'Noto Sans TC', sans-serif; /* 使用 Google Fonts 字型 */
-    max-width: 80%; /* 根據螢幕寬度調整 */
-    width: 400px; /* 最大寬度 */
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 2px solid #8b5a2b; /* 木紋邊框 */
+  font-family: 'Noto Sans TC', sans-serif; /* 使用 Google Fonts 字型 */
+  max-width: 80%; /* 根據螢幕寬度調整 */
+  width: 400px; /* 最大寬度 */
 }
 
 .dialogue-text {
-    margin: 10px 0;
-    font-size: 1.2rem;
-    white-space: pre-wrap; /* 允許換行 */
-    overflow: hidden;
-    border-right: 2px solid #000; /* 打字游標效果 */
+  margin: 10px 0;
+  font-size: 1.2rem;
+  white-space: pre-wrap; /* 允許換行 */
+  overflow: hidden;
+  border-right: 2px solid #000; /* 打字游標效果 */
 }
 
 /* 測驗按鈕區 */
 .quiz-container {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .start-btn {
-    background: #8b5a2b; /* 木紋顏色 */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background 0.3s;
-    text-decoration: none;
-    font-family: 'Noto Sans TC', sans-serif; /* 使用 Google Fonts 字型 */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  background: #8b5a2b; /* 木紋顏色 */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-decoration: none;
+  font-family: 'Noto Sans TC', sans-serif; /* 使用 Google Fonts 字型 */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 .start-btn:hover {
-    background: #6b4421; /* 深色木紋 */
+  background: #6b4421; /* 深色木紋 */
 }
 
 /* 手機版專用樣式調整 */
 @media (max-width: 768px) {
-    .result-card {
-      padding: 1rem;
-      margin-top: 20px;
-    }
-  
-    .animal-image {
-      width: 70vw;
-      max-width: 250px;
-    }
-  
-    h1.animal-title {
-      font-size: 1.8rem;
-      padding: 0 0.5rem;
-    }
-  
-    h1.animal-title::before,
-    h1.animal-title::after {
-      width: 20px;
-    }
-  
-    h1.animal-title::before {
-      left: -30px;
-    }
-  
-    h1.animal-title::after {
-      right: -30px;
-    }
-  
-    .teacher-container {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .teacher-img {
-      width: 80px;
-      margin: 0 0 1rem 0;
-    }
-  
-    .teacher-dialogue {
-      max-width: 90%;
-      font-size: 0.95rem;
-      padding: 10px;
-      text-align: center;
-    }
-  
-    .btn-secondary {
-      padding: 10px 25px;
-      font-size: 1rem;
-    }
+  .result-card {
+    padding: 1rem;
+    margin-top: 20px;
   }
+
+  .animal-image {
+    width: 70vw;
+    max-width: 250px;
+  }
+
+  h1.animal-title {
+    font-size: 1.8rem;
+    padding: 0 0.5rem;
+  }
+
+  h1.animal-title::before,
+  h1.animal-title::after {
+    width: 20px;
+  }
+
+  h1.animal-title::before {
+    left: -30px;
+  }
+
+  h1.animal-title::after {
+    right: -30px;
+  }
+
+  .teacher-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .teacher-img {
+    width: 80px;
+    margin: 0 0 1rem 0;
+  }
+
+  .teacher-dialogue {
+    max-width: 90%;
+    font-size: 0.95rem;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .btn-secondary {
+    padding: 10px 25px;
+    font-size: 1rem;
+  }
+}
+/* static/css/index.css 新增內容 */
+/* 新增跳過按鈕 */
+.skip-animation {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  background: rgba(255,255,255,0.8);
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.skip-animation:hover {
+  background: rgba(0,0,0,0.8);
+  color: white;
+}
+
+/* 修改媒體查詢 */
+@media (max-width: 768px) {
+  .logo {
+      width: 250px;
+  }
+
+  .dialogue-box {
+      width: 90%;
+      padding: 15px;
+  }
+
+  .start-btn {
+      font-size: 1rem;
+      padding: 8px 15px;
+  }
+  
+  .skip-animation {
+      bottom: 10px;
+      right: 10px;
+      font-size: 0.8rem;
+  }
+}
+
+/* 對話框 */
+.dialogue-box {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 2px solid #8b5a2b; /* 木紋邊框 */
+  font-family: 'Noto Sans TC', sans-serif;
+  max-width: 80%; /* 根據螢幕寬度調整 */
+  width: 500px; /* 增加寬度 */
+  min-height: 150px; /* 最小高度 */
+}
+
+//* 對話框文字 */
+.dialogue-text {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  white-space: pre-wrap; /* 保留換行符號 */
+  overflow: hidden;
+  border-right: 2px solid #000; /* 打字游標效果 */
+  text-align: center; /* 文字置中 */
+  line-height: 1.6; /* 增加行高 */
+  padding: 10px; /* 增加內邊距 */
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .dialogue-box {
+      width: 90%; /* 在小螢幕上佔滿更多空間 */
+      padding: 15px; /* 調整內邊距 */
+  }
+
+  .dialogue-text {
+      font-size: 1rem; /* 調整字體大小 */
+      line-height: 1.5; /* 調整行高 */
+  }
+}

@@ -99,3 +99,64 @@ button:hover {
     <p>進度：{{ progress }} / {{ total }}</p>
 </body>
 </html>
+
+/* 新增大K老師結果區塊樣式 */
+.teacher-result-section {
+    margin: 2rem 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+.teacher-result-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-result-img {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.teacher-result-text {
+    text-align: left;
+}
+
+.teacher-name {
+    font-size: 1rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-top: 0.5rem;
+    text-align: right;
+    font-style: italic;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .teacher-result-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .teacher-result-img {
+        width: 80px;
+    }
+
+    .teacher-result-text {
+        text-align: center;
+    }
+
+    .teacher-name {
+        text-align: center;
+    }
+}
+

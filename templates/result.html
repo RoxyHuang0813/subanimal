@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>測驗結果</title>
@@ -262,8 +263,9 @@
              class="logo">
     </a>
     
-    <div class="result-card">
-        <div class="result-content">
+    <div class="result-content">
+        <!-- 動物類型區塊 -->
+        <div class="animal-container">
             <h2>你的金錢動物原型是...</h2>
             <img src="{{ url_for('static', filename=animal + '.png') }}" 
                  alt="{{ animal_name }}" 
@@ -274,25 +276,23 @@
                 <div class="coin-effect" style="top: -10px; left: -20px;"></div>
                 <div class="coin-effect" style="top: -20px; right: -10px;"></div>
             </div>
-            <p class="result-text">恭喜你完成測驗！<br>快把專屬你的財富性格分享給朋友吧！</p>
-
-            <!-- 大K老師對話框 -->
-            <div class="teacher-section" id="teacher-section">
-                <div class="teacher-container">
-                    <img src="{{ url_for('static', filename='images/teacher_k.png') }}" 
-                         alt="大K老師" 
-                         class="teacher-img">
-                    <div class="teacher-dialogue">
-                        <p>太棒了！你是 {{ animal_name }} 的人！</p>
-                        <p>這代表你擁有獨特的財富性格，繼續努力，未來一定會更加豐盛！</p>
-                    </div>
+        </div>
+    
+        <!-- 新增大K老師對話框區塊 -->
+        <div class="teacher-result-section">
+            <div class="teacher-result-container">
+                <img src="{{ url_for('static', filename='images/teacher_k.png') }}" 
+                     alt="大K老師" 
+                     class="teacher-result-img">
+                <div class="teacher-result-text">
+                    <p class="result-text">恭喜你完成測驗！<br>快把專屬你的財富性格分享給朋友吧！</p>
+                    <p class="teacher-name">—— 大K老師</p>
                 </div>
             </div>
-
-            <a href="/" class="btn btn-secondary">重新測驗</a>
         </div>
+    
+        <a href="/" class="btn btn-secondary">重新測驗</a>
     </div>
-
     <!-- 新增音效 -->
     <audio id="win-sound" src="{{ url_for('static', filename='sounds/win.mp3') }}"></audio>
 
@@ -329,6 +329,26 @@
                 }, 300);
             });
         });
-    </script>
+   
+ 
+  // 鎖定結果頁
+  history.pushState(null, null, document.URL);
+  window.addEventListener('popstate', () => {
+    history.pushState(null, null, document.URL);
+    window.location.href = '/';
+  });
+
+  // 離開頁面提示
+  window.onbeforeunload = function() {
+    return '測驗結果將會遺失，確定要離開嗎？';
+  };
+});
+
+   
+   
+   
+   
+   
+   </script>
 </body>
 </html>

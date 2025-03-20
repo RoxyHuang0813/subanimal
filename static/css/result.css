@@ -1,0 +1,158 @@
+/* static/css/result.css */
+
+/* 結果頁容器 */
+.result-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 動物類型區塊 */
+.animal-container {
+    background: rgba(255, 255, 255, 0.95); /* 白色背景 */
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 3px solid #8B5A2B; /* 木紋色邊框 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2rem; /* 與下方對話框的間距 */
+    text-align: center;
+}
+
+/* 動物圖片 */
+.animal-image {
+    width: min(300px, 80vw);
+    height: auto;
+    margin: 1rem auto; /* 調整間距 */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 動物標題 */
+.animal-title-box {
+    margin: 1.5rem 0; /* 調整間距 */
+}
+
+.animal-title {
+    font-family: 'Rubik', sans-serif;
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: #FFD700; /* 金色 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 金幣閃光效果 */
+.coin-effect {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #FFD700; /* 金色 */
+    border-radius: 50%;
+    animation: coinFlash 1s infinite;
+    opacity: 0;
+}
+
+
+
+@keyframes coinFlash {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+}
+
+/* 大K老師對話框 */
+.teacher-result-section {
+    margin: 2rem 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+.teacher-result-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.95); /* 白色背景 */
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 3px solid #8B5A2B; /* 木紋色邊框 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* 對話框三角形裝飾 */
+.teacher-result-container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: #8B5A2B; /* 木紋色 */
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+/* 大K老師圖片 */
+.teacher-result-img {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    border: 3px solid #FFD700; /* 金色邊框 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 對話框文字 */
+.teacher-result-text {
+    text-align: left;
+    max-width: 400px;
+}
+
+.result-text {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    line-height: 1.6;
+    color: #444;
+    margin: 0;
+}
+
+.teacher-name {
+    font-size: 1rem;
+    color: #8B5A2B; /* 木紋色 */
+    font-weight: bold;
+    margin-top: 0.5rem;
+    text-align: right;
+    font-style: italic;
+}
+
+
+@media (max-width: 768px) {
+    .animal-container {
+        padding: 1rem; /* 調整內邊距 */
+    }
+
+    .animal-image {
+        width: 80%; /* 調整圖片大小 */
+    }
+
+    .animal-title {
+        font-size: 2rem; /* 調整標題大小 */
+    }
+}
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .teacher-result-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .teacher-result-img {
+        width: 80px;
+    }
+
+    .teacher-result-text {
+        text-align: center;
+    }
+
+    .teacher-name {
+        text-align: center;
+    }
+}
