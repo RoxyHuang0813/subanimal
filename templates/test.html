@@ -1,5 +1,3 @@
-test.html
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -105,105 +103,17 @@ test.html
             color: #e8f2e8; /* 白色 */
             margin-top: 20px;
         }
-    
-        <!-- 在test.html的</style>结束前添加这段代码 -->
-<style>
-    <!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-    <!-- 其他head內容保持不變 -->
-    <style>
-        /* 原有樣式保持不變... */
-
-        /* 手機版響應式調整 */
-        @media (max-width: 768px) {
-            body {
-                transform: scale(0.95);
-                transform-origin: top center;
-                padding: 15px !important;
-                min-height: 100vh;
-            }
-
-            .question-form {
-                max-width: 95vw !important;
-                padding: 20px; /* 增加表單內邊距 */
-            }
-
-            h1 {
-                font-size: 2.4rem !important; /* 調大標題 */
-                margin-bottom: 1rem !important;
-            }
-
-            h2 {
-                font-size: 1.6rem !important; /* 調大問題文字 */
-                line-height: 1.4;
-                margin-bottom: 1.5rem !important;
-            }
-
-            .form-check {
-                margin-bottom: 20px; /* 增加選項間距 */
-                padding: 12px; /* 增加選項內邊距 */
-                background: rgba(255,255,255,0.7); /* 增加選項背景 */
-                border-radius: 10px; /* 圓角效果 */
-            }
-
-            label {
-                font-size: 1.2rem !important; /* 調大選項文字 */
-                line-height: 1.4;
-                display: flex; /* 讓文字與radio對齊 */
-                align-items: center;
-                justify-content: center;
-            }
-
-            input[type="radio"] {
-                transform: scale(1.2); /* 放大radio按鈕 */
-                margin-right: 12px; /* 增加與文字的間距 */
-            }
-
-            button[type="submit"] {
-                padding: 12px 20px; /* 調大按鈕 */
-                font-size: 1.1rem !important;
-                margin-top: 25px; /* 增加頂部間距 */
-            }
-
-            .logo {
-                width: 140px !important; /* 稍微調大LOGO */
-            }
-
-            .progress-text {
-                font-size: 1.1rem !important; /* 進度文字調大 */
-            }
+        
+        /* 通用响应式调整 */
+    @media (max-width: 768px) {
+        body {
+            transform: scale(0.95); /* 整体缩小5% */
+            transform-origin: top center;
+            padding: 10px !important;
+            min-height: 100vh;
+            height: auto;
         }
 
-        /* 超小屏幕二次調整 */
-        @media (max-width: 400px) {
-            body {
-                transform: scale(0.9);
-            }
-            
-            h1 {
-                font-size: 2.2rem !important;
-            }
-            
-            h2 {
-                font-size: 1.4rem !important;
-            }
-
-            .form-check {
-                padding: 10px;
-                margin-bottom: 18px;
-            }
-
-            label {
-                font-size: 1.1rem !important;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- body內容保持不變 -->
-</body>
-</html>
     </style>
 </head>
 <body>
@@ -223,3 +133,5 @@ test.html
     <p class="progress-text">進度：{{ progress }} / {{ total }}</p>
 </body>
 </html>
+
+
