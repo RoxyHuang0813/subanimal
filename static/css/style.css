@@ -160,3 +160,29 @@ button:hover {
     }
 }
 
+.share-buttons {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-facebook {
+    background-color: #1877f2;
+    color: white;
+}
+
+.btn-line {
+    background-color: #00b900;
+    color: white;
+}
+
+.btn-institute {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-facebook:hover, .btn-line:hover, .btn-institute:hover {
+    opacity: 0.9;
+}

@@ -1,24 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <!-- 新增Open Graph元标签 -->
-    <meta property="og:title" content="我的金錢動物是{{ animal_name }}！快來測驗你的財富性格原型">
-    <meta property="og:description" content="{{ share_text if share_text else '快來測驗你的金錢動物原型，看看你是哪一種財富性格！' }}">
-    <meta property="og:image" content="{{ url_for('static', filename=animal + '.png', _external=True) }}">
-    <meta property="og:url" content="{{ request.url }}">
-    <meta property="og:type" content="website">
-
+    <meta property="og:title" content="金錢動物測驗結果" />
+    <meta property="og:description" content="{{ share_text }}" />
+    <meta property="og:image" content="{{ url_for('static', filename='images/' + animal + '.jpg', _external=True) }}" />
+    <meta property="og:url" content="{{ request.url }}" />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>測驗結果</title>
-    <!-- 引入 Bootstrap CSS 和 Google Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Rubik:wght@500&display=swap" rel="stylesheet">
-    <!-- 引入 Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- 自定義樣式 -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <style>
         :root {
             --primary-color: #8B5A2B; /* 木紋色 */
@@ -27,7 +22,7 @@
         }
 
         body {
-            background: url("{{ url_for('static', filename='images/forest-bg.jpg') }}") no-repeat center center/cover;
+            background: url("{{ url_for('static', filename='images/forest-bg.jpg') }}") no-repeat center center/cover; /* 森林背景圖 */
             color: #333;
             font-family: 'Noto Sans TC', sans-serif;
             min-height: 100vh;
@@ -39,6 +34,7 @@
             text-align: center;
         }
 
+        /* LOGO連結樣式 */
         .logo-link {
             display: inline-block;
             transition: transform 0.3s ease;
@@ -55,7 +51,7 @@
         }
 
         .result-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
             backdrop-filter: blur(10px);
             max-width: min(600px, 90vw);
             width: 100%;
@@ -65,7 +61,7 @@
             transform: translateY(20px);
             opacity: 0;
             animation: cardEnter 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-            border: 2px solid var(--primary-color);
+            border: 2px solid var(--primary-color); /* 木紋邊框 */
         }
 
         @keyframes cardEnter {
@@ -75,6 +71,7 @@
             }
         }
 
+        /* 圖片與標題垂直排列 */
         .result-content {
             display: flex;
             flex-direction: column;
@@ -102,7 +99,7 @@
         h2 {
             font-family: 'Rubik', sans-serif;
             font-size: clamp(1.8rem, 5vw, 2.5rem);
-            color: var(--secondary-color);
+            color: var(--secondary-color); /* 森林綠色 */
             margin-bottom: 1.5rem;
             letter-spacing: 1px;
         }
@@ -115,7 +112,7 @@
         h1.animal-title {
             font-family: 'Rubik', sans-serif;
             font-size: clamp(2rem, 6vw, 3rem);
-            color: var(--accent-color);
+            color: var(--accent-color); /* 金色 */
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
             position: relative;
             display: inline-block;
@@ -127,7 +124,7 @@
             content: '';
             position: absolute;
             height: 3px;
-            background: var(--primary-color);
+            background: var(--primary-color); /* 木紋色 */
             width: 50px;
             top: 50%;
             transform: translateY(-50%);
@@ -149,9 +146,10 @@
             color: #444;
         }
 
+        /* 大K老師對話框 */
         .teacher-section {
             margin-top: 2rem;
-            display: none;
+            display: none; /* 初始隱藏 */
             opacity: 0;
             animation: fadeIn 1s ease-in-out forwards;
         }
@@ -211,6 +209,7 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
+        /* 金幣閃光效果 */
         .coin-effect {
             position: absolute;
             width: 20px;
@@ -226,185 +225,182 @@
             50% { opacity: 1; transform: scale(1); }
         }
 
-        /* 分享按鈕區塊 */
-        .share-section {
-            margin: 2rem 0;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .share-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .share-btn {
-            background: #fff;
-            color: #333;
-            padding: 12px 25px;
-            border-radius: 30px;
-            border: 2px solid #8B5A2B;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .share-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .share-btn i {
-            font-size: 1.2rem;
-        }
-
-        .facebook-btn {
-            background: #1877f2;
-            color: white;
-            border-color: #1877f2;
-        }
-
-        .line-btn {
-            background: #00b900;
-            color: white;
-            border-color: #00b900;
-        }
-
-        .copy-btn {
-            background: #8B5A2B;
-            color: white;
-            border-color: #8B5A2B;
-        }
-
-        /* 響應式設計 */
+        /* 響應式調整 */
         @media (max-width: 768px) {
-            body {
-                transform: scale(0.98);
-                transform-origin: top center;
-                padding: 10px !important;
-                min-height: 100vh;
-                height: auto;
-            }
-
             .result-card {
-                margin: 10px 0;
                 padding: 1.5rem;
             }
 
-            .animal-image {
-                width: 90vw;
-                max-width: 90vw;
-            }
-
-            .share-buttons {
-                gap: 0.5rem;
-            }
-
-            .share-btn {
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 400px) {
-            body {
-                transform: scale(0.9);
-            }
-            
             h1.animal-title {
-                font-size: clamp(1.5rem, 8vw, 2rem);
+                font-size: 2.2rem;
             }
-            
-            .teacher-result-img {
+
+            h1.animal-title::before,
+            h1.animal-title::after {
+                width: 30px;
+            }
+
+            h1.animal-title::before {
+                left: -40px;
+            }
+
+            h1.animal-title::after {
+                right: -40px;
+            }
+
+            .teacher-img {
                 width: 80px;
             }
+
+            .teacher-dialogue {
+                font-size: 1rem;
+            }
         }
+        .share-buttons {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-facebook {
+            background-color: #1877f2;
+            color: white;
+        }
+
+        .btn-line {
+            background-color: #00b900;
+            color: white;
+        }
+
+        .btn-institute {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-facebook:hover, .btn-line:hover, .btn-institute:hover {
+            opacity: 0.9;
+        }
+    
+
     </style>
+
 </head>
-<!-- LOGO連結 -->
-<a href="https://www.facebook.com/subconscious.oo" class="logo-link" target="_blank" rel="noopener noreferrer">
-    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="潛意識無限學院" class="logo">
-</a>
-
-<div class="result-content">
-    <!-- 動物類型區塊 -->
-    <div class="animal-container">
-        <h2>你的金錢動物原型是...</h2>
-        <img src="{{ url_for('static', filename=animal + '.png') }}" alt="{{ animal_name }}" class="animal-image">
-        <div class="animal-title-box">
-            <h1 class="animal-title">{{ animal_name }}</h1>
-            <!-- 金幣閃光效果 -->
-            <div class="coin-effect" style="top: -10px; left: -20px;"></div>
-            <div class="coin-effect" style="top: -20px; right: -10px;"></div>
+<body>
+    <!-- 新增LOGO連結 -->
+   <a href="https://www.facebook.com/subconscious.oo" 
+       class="logo-link"
+       target="_blank"
+       rel="noopener noreferrer">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" 
+             alt="潛意識無限學院" 
+             class="logo">
+    </a>
+    
+    <div class="result-content">
+        <!-- 動物類型區塊 -->
+        <div class="animal-container">
+            <h2>你的金錢動物原型是...</h2>
+            <img src="{{ url_for('static', filename=animal + '.png') }}" 
+                 alt="{{ animal_name }}" 
+                 class="animal-image">
+            <div class="animal-title-box">
+                <h1 class="animal-title">{{ animal_name }}</h1>
+                <!-- 金幣閃光效果 -->
+                <div class="coin-effect" style="top: -10px; left: -20px;"></div>
+                <div class="coin-effect" style="top: -20px; right: -10px;"></div>
+            </div>
+            <!-- 重新測驗按鈕 -->
+            <a href="/" class="btn btn-secondary">重新測驗</a>
         </div>
-    </div>
-
-    <!-- 大K老師對話框區塊 -->
-    <div class="teacher-result-section">
-        <div class="teacher-result-container">
-            <img src="{{ url_for('static', filename='images/teacher_k.png') }}" alt="大K老師" class="teacher-result-img">
-            <div class="teacher-result-text">
-                <p class="result-text">恭喜你完成測驗！<br>快把專屬你的財富性格分享給朋友吧！</p>
-                <p class="teacher-name">—— 大K老師</p>
+    
+        <!-- 新增大K老師對話框區塊 -->
+        <div class="teacher-result-section">
+            <div class="teacher-result-container">
+                <img src="{{ url_for('static', filename='images/teacher_k.png') }}" 
+                     alt="大K老師" 
+                     class="teacher-result-img">
+                <div class="teacher-result-text">
+                    <p class="result-text">恭喜你完成測驗！<br>快把專屬你的財富性格分享給朋友吧！</p>
+                    <p class="teacher-name">—— 大K老師</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- 分享按鈕區塊 -->
-    <div class="share-section">
+        <!-- 分享按鈕 -->
         <div class="share-buttons">
-            <a href="#" class="share-btn facebook-btn" onclick="shareOnFacebook()">
-                <i class="fab fa-facebook"></i> Facebook
+            <a href="#" id="fb-share" class="btn btn-facebook" onclick="shareOnFacebook()">
+                <i class="fab fa-facebook-f"></i> 分享到 Facebook
             </a>
-            <a href="#" class="share-btn line-btn" onclick="shareOnLine()">
-                <i class="fab fa-line"></i> Line
+            <a href="#" id="line-share" class="btn btn-line" onclick="shareOnLine()">
+                <i class="fab fa-line"></i> 分享到 LINE
             </a>
-            <a href="#" class="share-btn copy-btn" onclick="copyLink()">
-                <i class="fas fa-link"></i> 複製連結
+            <a href="https://www.facebook.com/subconscious.oo" 
+               class="btn btn-institute" 
+               target="_blank" 
+               rel="noopener noreferrer">
+                <i class="fas fa-link"></i> 前往潛意識無限學院
             </a>
         </div>
-    </div>
+    
+    <script>
+       document.addEventListener('DOMContentLoaded', () => {
+    // 播放中獎音效
+    const audio = document.getElementById('win-sound');
+    if (audio) {
+        audio.volume = 0.6; // 調整音量
+    }
 
-    <!-- 重新測驗按鈕 -->
-    <a href="/" class="btn btn-secondary">重新測驗</a>
-</div>
-
-<!-- 音效 -->
-<audio id="win-sound" src="{{ url_for('static', filename='sounds/win.mp3') }}"></audio>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const audio = document.getElementById('win-sound');
-        audio.volume = 0.6;
-
-        // 圖片加載完成後播放音效
-        const animalImage = document.querySelector('.animal-image');
+    // 在圖片加載完成後播放
+    const animalImage = document.querySelector('.animal-image');
+    if (animalImage) {
         animalImage.addEventListener('load', () => {
-            audio.play().catch(error => {
-                console.log('音效自動播放被阻止，需要用戶交互');
-            });
+            setTimeout(() => {
+                if (audio) {
+                    audio.play().catch(error => {
+                        console.log('音效自動播放被阻止，需要用戶交互');
+                    });
+                }
 
-            // 顯示大K老師對話框
-            const teacherSection = document.querySelector('.teacher-result-section');
-            teacherSection.style.display = 'block';
-            teacherSection.style.opacity = '1';
+                // 顯示大K老師對話框
+                const teacherSection = document.getElementById('teacher-section');
+                if (teacherSection) {
+                    setTimeout(() => {
+                        teacherSection.style.display = 'block';
+                        teacherSection.style.opacity = '1';
+                    }, 1000); // 1秒後顯示
+                }
+            }, 500); // 延遲半秒配合動畫
         });
+    }
 
-        // 按鈕互動
-        const btn = document.querySelector('.btn-secondary');
+    // 按鈕互動
+    const btn = document.querySelector('.btn-secondary');
+    if (btn) {
         btn.addEventListener('click', () => {
+            // 添加頁面轉場效果
             document.body.style.opacity = 0;
             setTimeout(() => {
                 window.location.href = '/';
             }, 300);
         });
-    });
+    }
+// Facebook 分享功能
+        function shareOnFacebook() {
+            const shareUrl = encodeURIComponent(window.location.href);
+            const shareText = encodeURIComponent("{{ share_text }}");
+            const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}&quote=${shareText}`;
+            window.open(facebookShareUrl, '_blank');
+        }
 
+        // LINE 分享功能
+        function shareOnLine() {
+            const shareUrl = encodeURIComponent(window.location.href);
+            const lineShareUrl = `https://social-plugins.line.me/lineit/share?url=${shareUrl}`;
+            window.open(lineShareUrl, '_blank');
+        }
+   
     // 鎖定結果頁
     history.pushState(null, null, document.URL);
     window.addEventListener('popstate', () => {
@@ -416,40 +412,9 @@
     window.onbeforeunload = function() {
         return '測驗結果將會遺失，確定要離開嗎？';
     };
-
-    // 更新分享内容生成函数
-        function getShareContent() {
-            return {
-                title: "我的金錢動物是{{ animal_name }}！快來測驗你的財富性格原型",
-                text: `{{ animal_name }}型財富性格：{{ share_text if share_text else '快來測驗你的金錢動物原型！' }}\n`,
-                url: window.location.href,
-                hashtag: "#金錢動物測驗"
-            };
-        }
-
-        // 更新Facebook分享函数
-        function shareOnFacebook() {
-            const content = getShareContent();
-            const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(content.url)}`;
-            window.open(shareUrl, 'fb-share', 'width=600,height=400');
-        }
-
-        // 更新LINE分享函数
-        function shareOnLine() {
-            const content = getShareContent();
-            const shareText = encodeURIComponent(`${content.title}\n${content.text}\n${content.url}`);
-            const shareUrl = `https://social-plugins.line.me/lineit/share?text=${shareText}`;
-            window.open(shareUrl, 'line-share', 'width=600,height=500');
-        }
-
-        // 更新复制链接功能
-        function copyLink() {
-            const content = getShareContent();
-            const textToCopy = `${content.title}\n${content.text}\n${content.url}`;
-            navigator.clipboard.writeText(textToCopy)
-                .then(() => alert('連結已複製到剪貼簿！'))
-                .catch(() => alert('複製失敗，請手動複製連結。'));
-        }
-</script>
+});
+   
+   
+        </script>
 </body>
 </html>
