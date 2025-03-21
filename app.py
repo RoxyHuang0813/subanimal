@@ -148,7 +148,6 @@ QUESTIONS = [
         ]
     }
 ]
-
 @app.route('/')
 def index():
     # 初始化會話
@@ -208,16 +207,22 @@ def result():
         counts[animal] = counts.get(animal, 0) + 1
     result_type = max(counts, key=lambda k: counts[k])
 
+    # 生成分享內容
+    share_text = (
+        f"我在金錢動物測驗中發現自己是{ANIMALS[result_type]}！\n\n"
+        "快來參加潛意識無限學院的金錢動物測驗，看看您是哪一種？"
+    )
+
     # 創建響應對象並設置緩存頭
     response = make_response(render_template(
         'result.html',
         animal=result_type,
-        animal_name=ANIMALS[result_type]
+        animal_name=ANIMALS[result_type],
+        share_text=share_text  # 將分享內容傳遞給模板
     ))
     response.headers['Cache-Control'] = 'no-store, must-revalidate'
     response.headers['Pragma'] = 'no-cache'
     response.headers['Expires'] = '0'
     return response
-
 if __name__ == '__main__':
     app.run(debug=True)
