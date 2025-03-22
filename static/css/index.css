@@ -348,6 +348,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow-y: auto; /* 允許垂直滾動 */
 }
 
 .teacher-intro-content {
@@ -358,6 +359,7 @@ body {
   max-width: 500px;
   width: 90%;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 陰影效果 */
+  margin: 20px 0; /* 增加上下邊距 */
 }
 
 /* 照片容器 */
@@ -414,8 +416,9 @@ body {
 .back-btn:hover {
   background-color: #6b4421; /* 深色木紋 */
   transform: scale(1.05); /* 懸停時放大 */
+}
 
-  /* 手機版樣式調整 */
+/* 手機版樣式調整 */
 @media (max-width: 768px) {
   .teacher-intro-content {
       padding: 15px; /* 減少內邊距 */
@@ -423,7 +426,7 @@ body {
   }
 
   .teacher-large-img {
-      width: 30px; /* 縮小照片 */
+      width: 200px; /* 縮小照片 */
   }
 
   .intro-dialogue-box {
@@ -442,7 +445,6 @@ body {
       padding: 8px 16px; /* 縮小按鈕 */
       font-size: 14px; /* 縮小按鈕字體 */
   }
-}
 }
 /* 讓大K老師圖像的游標變成手的形狀 */
 .character-img {

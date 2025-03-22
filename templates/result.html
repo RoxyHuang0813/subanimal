@@ -257,50 +257,53 @@
             color: #444;
         }
 
-        /* 大K老師對話框 */
-        .teacher-section {
-            margin-top: 2rem;
-            display: none; /* 初始隱藏 */
-            opacity: 0;
-            animation: fadeIn 1s ease-in-out forwards;
-        }
+       /* 大K老師對話框區塊 */
+.teacher-result-section {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
+.teacher-result-container {
+    display: flex;
+    flex-direction: column; /* 將照片和對話框垂直排列 */
+    align-items: center; /* 置中對齊 */
+    text-align: center; /* 文字置中 */
+    max-width: 500px; /* 限制最大寬度 */
+    width: 100%;
+}
 
-        .teacher-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
+/* 大K老師照片 */
+.teacher-result-img {
+    width: 100px; /* 調整照片大小 */
+    height: auto;
+    margin-bottom: 1rem; /* 照片與對話框的間距 */
+    border-radius: 50%; /* 圓形照片 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 陰影效果 */
+}
 
-        .teacher-img {
-            width: 100px;
-            height: auto;
-            margin-right: 1rem;
-            animation: float 3s ease-in-out infinite;
-        }
+/* 對話框文字 */
+.teacher-result-text {
+    background: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 2px solid var(--primary-color); /* 木紋色邊框 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 陰影效果 */
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+    width: 100%; /* 讓對話框寬度與照片一致 */
+}
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .teacher-dialogue {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 15px;
-            border: 2px solid var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
-            text-align: left;
-            font-size: 1.1rem;
-            color: #333;
-        }
+/* 老師名字 */
+.teacher-name {
+    font-size: 1rem;
+    color: var(--primary-color); /* 木紋色 */
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
 
         .btn-secondary {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
