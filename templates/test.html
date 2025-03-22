@@ -10,10 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: url("{{ url_for('static', filename='images/forest-bg.jpg') }}") no-repeat center center/cover; /* 森林背景圖 */
-            color: #333;  /* 黑色文字 */
-            font-family: 'Noto Sans TC', sans-serif; /* 使用 Google Fonts 字型 */
-            padding: 30px;
+            background: url("{{ url_for('static', filename='images/forest-bg.jpg') }}") no-repeat center center/cover;
+            color: #333;
+            font-family: 'Noto Sans TC', sans-serif;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -24,46 +24,48 @@
         .logo {
             display: block;
             margin: 0 auto 20px;
-            width: 150px;  /* 調整 LOGO 大小 */
+            width: 150px;
             height: auto;
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: bold;
-            color: #4CAF50; /* 森林綠色 */
+            color: #4CAF50;
             text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 文字陰影 */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
         }
 
         h2 {
-            font-size: 2rem;
-            color: #3e2814; /* 深咖啡色 */
+            font-size: 1.8rem;
+            color: #cd8848;
             margin-bottom: 20px;
-            text-align: center; /* 題目置中 */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* 文字陰影 */
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         p {
-            font-size: 1.2rem;
-            color: #333;  /* 黑色文字 */
+            font-size: 1.1rem;
+            color: #333;
             text-align: center;
+            margin-bottom: 20px;
         }
 
         .question-form {
-            background-color: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-top: 30px;
+            margin-top: 20px;
             width: 100%;
-            max-width: 500px; /* 限制表單寬度 */
-            border: 2px solid #8B5A2B; /* 木紋邊框 */
+            max-width: 500px;
+            border: 2px solid #8B5A2B;
         }
 
         .form-check {
             margin-bottom: 15px;
-            text-align: center;  /* 選項置中 */
+            text-align: left; /* 選項文字靠左對齊 */
         }
 
         input[type="radio"] {
@@ -71,49 +73,71 @@
         }
 
         label {
-            font-size: 1.2rem;
-            color: #333;  /* 黑色文字 */
+            font-size: 1rem;
+            color: #333;
+            display: block; /* 讓選項文字換行 */
+            word-wrap: break-word; /* 長文字自動換行 */
         }
 
         button {
-            background-color: #8B5A2B; /* 木紋顏色 */
+            background-color: #8B5A2B;
             color: #fff;
             padding: 10px 20px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             border: none;
             border-radius: 25px;
             width: 100%;
             cursor: pointer;
             transition: background-color 0.3s ease;
             margin-top: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 按鈕陰影 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
-            background-color: #6B4421; /* 深色木紋 */
+            background-color: #6B4421;
         }
 
         button:focus {
             outline: none;
         }
 
-        /* 進度條樣式 */
         .progress-text {
             font-size: 1rem;
-            color: #e8f2e8; /* 白色 */
+            color: #e8f2e8;
             margin-top: 20px;
         }
 
-        /* 通用响应式调整 */
-    @media (max-width: 768px) {
-        body {
-            transform: scale(0.90); /* 整体缩小10% */
-            transform-origin: top center;
-            padding: 10px !important;
-            min-height: 100vh;
-            height: auto;
-        }
+        /* 手機版樣式調整 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
 
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .question-form {
+                padding: 15px;
+            }
+
+            label {
+                font-size: 0.9rem;
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 8px 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -133,5 +157,3 @@
     <p class="progress-text">進度：{{ progress }} / {{ total }}</p>
 </body>
 </html>
-
-
