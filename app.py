@@ -120,7 +120,10 @@ def story(animal):
     story_content = ANIMAL_STORIES.get(animal, '沒有找到該動物的故事。')
     return render_template('story.html', story_content=story_content, animal_name=ANIMALS.get(animal, '未知動物'))
 
-
+# 新增分享頁面路由
+@app.route('/share')
+def share():
+    return render_template('share.html')
 
 QUESTIONS = [
     {

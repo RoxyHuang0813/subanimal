@@ -6,6 +6,9 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* 區塊之間的間距 */
 }
 
 /* 動物類型區塊 */
@@ -15,7 +18,7 @@
     border-radius: 15px;
     border: 3px solid #8B5A2B; /* 木紋色邊框 */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    margin-bottom: 2rem; /* 與下方對話框的間距 */
+    margin-bottom: 1rem; /* 與下方對話框的間距 */
     text-align: center;
 }
 
@@ -120,6 +123,16 @@
     font-style: italic;
 }
 
+
+
+/* 分享圖卡區塊 */
+.share-section {
+    margin-top: 1rem; /* 向上移動 */
+    margin-bottom: 2rem; /* 與重新測驗按鈕的間距 */
+    padding: 0 20px; /* 左右內邊距 */
+    text-align: center; /* 內容居中 */
+}
+
 /* 分享圖卡 */
 .share-card {
     background: rgba(255, 255, 255, 0.95); /* 白色背景 */
@@ -127,8 +140,8 @@
     border-radius: 15px;
     border: 3px solid #8B5A2B; /* 木紋色邊框 */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    margin: 2rem auto;
-    max-width: 400px;
+    margin: 0 auto; /* 水平居中 */
+    max-width: 400px; /* 固定寬度 */
     text-align: center;
 }
 
@@ -250,6 +263,10 @@
     }
 }
 
+
+
+
+
 /* 手機版樣式 */
 @media (max-width: 768px) {
     .animal-container {
@@ -266,6 +283,13 @@
 
     .animal-title {
         font-size: 2rem; /* 較小的字體 */
+    }
+
+    .share-section {
+         margin-top: 0.5rem; /* 較小的向上移動 */
+         margin-bottom: 1.5rem; /* 較小的間距 */
+         padding: 0 10px; /* 較小的左右內邊距 */
+        }
     }
 
     .share-card {

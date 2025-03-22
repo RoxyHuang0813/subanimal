@@ -676,7 +676,6 @@
 
 <!-- 結果卡片 -->
 <div class="result-card">
-
     <div class="result-content">
         <!-- 動物類型區塊 -->
         <div class="animal-container">
@@ -692,47 +691,47 @@
             <a href="{{ url_for('story', animal=animal) }}" class="btn btn-secondary">聽聽它的故事</a>
         </div>
 
-        <!-- 個性化分享圖卡 -->
-        <div class="share-section">
-            <div class="share-card">
-                <div class="card-content">
-                    <!-- 動物小圖 -->
-                    <img src="{{ url_for('static', filename=animal + '.png') }}" 
-                         alt="{{ animal_name }}" 
-                         class="animal-image-share">
-                   <!-- 動物類型 - 綠色 -->
-                   <h3 class="animal-type">你的金錢動物原型是</h3>
-                   <!-- 動物名稱 - 金色 -->
-                   <h3 class="animal-name">{{ animal_name }}</h3>
-                   <!-- 隨機語錄 - 深紅色 -->
-                   <p class="quote">{{ random_quote }}</p>
-                    <!-- 新增 LOGO -->
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" 
-                 alt="潛意識無限學院" 
-                 class="logo-image">
+        <!-- 大K老師對話框 -->
+        <div class="teacher-result-section">
+            <div class="teacher-result-container">
+                <img src="{{ url_for('static', filename='images/teacher_k.png') }}" alt="大K老師" class="teacher-result-img">
+                <div class="teacher-result-text">
+                    <p class="result-text">{{ teacher_dialogue }}</p>
+                    <p class="teacher-name">—— 大K老師</p>
                 </div>
             </div>
-            <div class="share-buttons">
-                <button onclick="downloadCard()" class="btn btn-share">
-                    <i class="fas fa-download"></i> 下載圖卡
-                </button>
-                <button onclick="shareCard()" class="btn btn-share">
-                    <i class="fas fa-share-alt"></i> 分享到社群
-                </button>
-            </div>
         </div>
-
     </div>
 </div>
 
-<!-- 大K老師對話框 -->
-<div class="teacher-result-section">
-    <div class="teacher-result-container">
-        <img src="{{ url_for('static', filename='images/teacher_k.png') }}" alt="大K老師" class="teacher-result-img">
-        <div class="teacher-result-text">
-            <p class="result-text">{{ teacher_dialogue }}</p>
-            <p class="teacher-name">—— 大K老師</p>
+<!-- 分享圖卡區塊 -->
+<div class="share-section">
+    <div class="share-card">
+        <div class="card-content">
+            <!-- 動物小圖 -->
+            <img src="{{ url_for('static', filename=animal + '.png') }}" 
+                 alt="{{ animal_name }}" 
+                 class="animal-image-share">
+            <!-- 動物類型 - 綠色 -->
+            <h3 class="animal-type">你的金錢動物原型是</h3>
+            <!-- 動物名稱 - 金色 -->
+            <h3 class="animal-name">{{ animal_name }}</h3>
+            <!-- 隨機語錄 - 深紅色 -->
+            <p class="quote">{{ random_quote }}</p>
+            <!-- 新增 LOGO -->
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" 
+                     alt="潛意識無限學院" 
+                     class="logo-image">
+            </div>
+        </div>
+        <div class="share-buttons">
+            <button onclick="downloadCard()" class="btn btn-share">
+                <i class="fas fa-download"></i> 下載圖卡
+            </button>
+            <button onclick="shareCard()" class="btn btn-share">
+                <i class="fas fa-share-alt"></i> 分享到社群
+            </button>
         </div>
     </div>
 </div>
@@ -757,25 +756,35 @@
         });
     }
 
-    // 分享到社群功能
     function shareCard() {
-        const card = document.querySelector('.share-card');
-        html2canvas(card).then(canvas => {
-            canvas.toBlob(blob => {
-                const file = new File([blob], '金錢動物原型圖卡.png', { type: 'image/png' });
-                const shareData = {
+    const card = document.querySelector('.share-card');
+    html2canvas(card).then(canvas => {
+        canvas.toBlob(blob => {
+            const file = new File([blob], '金錢動物原型圖卡.png', { type: 'image/png' });
+
+            // 先嘗試包含圖片
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                navigator.share({
                     files: [file],
                     title: '我的金錢動物原型',
-                    text: '快來看看你的金錢動物原型是什麼！',
-                };
-                if (navigator.canShare && navigator.canShare(shareData)) {
-                    navigator.share(shareData);
-                } else {
-                    alert('您的瀏覽器不支援分享功能，請使用其他方式分享。');
-                }
-            });
+                    text: '快來看看你的金錢動物原型是什麼！'
+                }).catch(error => console.log('分享失敗:', error));
+            } 
+            // 若圖片分享不支援，則只分享文字
+            else if (navigator.canShare && navigator.canShare({ text: '快來看看你的金錢動物原型是什麼！' })) {
+                navigator.share({
+                    title: '我的金錢動物原型',
+                    text: '快來看看你的金錢動物原型是什麼！'
+                }).catch(error => console.log('分享失敗:', error));
+            } 
+            // 如果兩種方式都不支援，提示用戶
+            else {
+                alert('您的瀏覽器不支援分享功能，請使用其他方式分享。');
+            }
         });
-    }
+    });
+}
+
 </script>
 </body>
 </html>

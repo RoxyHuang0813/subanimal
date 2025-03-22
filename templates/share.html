@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分享金錢動物測驗</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // 分享圖卡和文字
+        function shareCard() {
+            const card = document.querySelector('.share-card');
+            if (!card) {
+                console.error("找不到 .share-card 元素");
+                return;
+            }
+
+            // 生成圖卡
+            html2canvas(card).then(canvas => {
+                canvas.toBlob(blob => {
+                    const file = new File([blob], '金錢動物原型圖卡.png', { type: 'image/png' });
+
+                    // 分享內容
+                    const shareText = "🔥 快來測驗你的潛意識金錢動物原型！\n" +
+                                     "你是松鼠型、獵豹型，還是孔雀型？\n" +
+                                     "立即測驗：https://animal-crar.onrender.com"; // 使用您的網站連結
+
+                    // 檢查是否支援分享文件
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        // 分享圖片和文字
+                        navigator.share({
+                            files: [file],
+                            title: '我的金錢動物原型',
+                            text: shareText,
+                        }).then(() => {
+                            console.log('分享成功！');
+                        }).catch(error => {
+                            console.error('分享失敗：', error);
+                            fallbackShare(canvas, shareText); // 如果分享失敗，使用替代方案
+                        });
+                    } else {
+                        fallbackShare(canvas, shareText); // 如果不支援分享文件，使用替代方案
+                    }
+                });
+            }).catch(error => {
+                console.error("生成圖卡失敗：", error);
+                alert('生成圖卡失敗，請稍後再試。');
+            });
+        }
+
+        // 替代方案：下載圖卡並複製文字
+        function fallbackShare(canvas, text) {
+            // 下載圖卡
+            const link = document.createElement('a');
+            link.download = '金錢動物原型圖卡.png';
+            link.href = canvas.toDataURL();
+            link.click();
+
+            // 複製文字到剪貼簿
+            navigator.clipboard.writeText(text).then(() => {
+                alert('圖卡已下載，文字已複製到剪貼簿！\n請手動分享文字。');
+            }).catch(error => {
+                console.error('複製文字失敗：', error);
+                alert('圖卡已下載，請手動複製以下文字並分享：\n\n' + text);
+            });
+        }
+
+        // 頁面載入後自動執行分享
+        window.onload = shareCard;
+    </script>
+</head>
+<body>
+    <div class="share-card">
+        <!-- 這裡放置與 result.html 相同的分享圖卡內容 -->
+        <div class="card-content">
+            <img src="{{ url_for('static', filename=animal + '.png') }}" alt="{{ animal_name }}" class="animal-image-share">
+            <h3 class="animal-type">你的金錢動物原型是</h3>
+            <h3 class="animal-name">{{ animal_name }}</h3>
+            <p class="quote">{{ random_quote }}</p>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="潛意識無限學院" class="logo-image">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
