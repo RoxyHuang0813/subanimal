@@ -1,5 +1,3 @@
-/* static/css/result.css */
-
 /* 結果頁容器 */
 .result-content {
     text-align: center;
@@ -14,7 +12,7 @@
 /* 動物類型區塊 */
 .animal-container {
     background: rgba(255, 255, 255, 0.95); /* 白色背景 */
-    padding: 1.5rem;
+    padding: 2rem; /* 較大的內邊距 */
     border-radius: 15px;
     border: 3px solid #8B5A2B; /* 木紋色邊框 */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -24,7 +22,7 @@
 
 /* 動物圖片 */
 .animal-image {
-    width: min(300px, 80vw);
+    width: 300px; /* 較大的圖片 */
     height: auto;
     margin: 1rem auto; /* 調整間距 */
     border-radius: 15px;
@@ -38,7 +36,7 @@
 
 .animal-title {
     font-family: 'Rubik', sans-serif;
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: 3rem; /* 較大的字體 */
     color: #FFD700; /* 金色 */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -122,8 +120,6 @@
     text-align: right;
     font-style: italic;
 }
-
-
 
 /* 分享圖卡區塊 */
 .share-section {
@@ -212,131 +208,4 @@
 
 .btn-share i {
     font-size: 1.2rem;
-}
-
-/* 電腦版樣式（預設樣式） */
-@media (min-width: 769px) {
-    .animal-container {
-        padding: 2rem; /* 較大的內邊距 */
-    }
-
-    .animal-image {
-        width: 300px; /* 較大的圖片 */
-    }
-
-    .animal-image-share {
-        width: 150px; /* 較大的圖片 */
-    }
-
-    .animal-title {
-        font-size: 3rem; /* 較大的字體 */
-    }
-
-    .share-card {
-        max-width: 400px; /* 固定寬度 */
-        padding: 2rem; /* 較大的內邊距 */
-    }
-
-    .card-content {
-        padding: 1.5rem; /* 較大的內邊距 */
-    }
-
-    .card-content h3 {
-        font-size: 1.5rem; /* 較大的字體 */
-    }
-
-    .card-content .quote {
-        font-size: 1.2rem; /* 較大的字體 */
-    }
-
-    .logo-image {
-        width: 120px; /* 較大的 LOGO */
-    }
-
-    .btn-share {
-        font-size: 1rem; /* 較大的字體 */
-        padding: 12px 20px; /* 較大的按鈕 */
-    }
-
-    .teacher-section {
-        display: block; /* 顯示老師對話框 */
-    }
-}
-
-
-
-
-
-/* 手機版樣式 */
-@media (max-width: 768px) {
-    .animal-container {
-        padding: 1rem; /* 較小的內邊距 */
-    }
-
-    .animal-image {
-        width: 80%; /* 較小的圖片 */
-    }
-
-    .animal-image-share {
-        width: 60px; /* 較小的圖片 */
-    }
-
-    .animal-title {
-        font-size: 2rem; /* 較小的字體 */
-    }
-
-    .share-section {
-         margin-top: 0.5rem; /* 較小的向上移動 */
-         margin-bottom: 1.5rem; /* 較小的間距 */
-         padding: 0 10px; /* 較小的左右內邊距 */
-        }
-    }
-
-    .share-card {
-        max-width: 90%; /* 較窄的寬度 */
-        padding: 1rem; /* 較小的內邊距 */
-    }
-
-    .card-content {
-        padding: 1rem; /* 較小的內邊距 */
-    }
-
-    .card-content h3 {
-        font-size: 1.2rem; /* 較小的字體 */
-    }
-
-    .card-content .quote {
-        font-size: 0.9rem; /* 較小的字體 */
-    }
-
-    .logo-image {
-        width: 60px; /* 較小的 LOGO */
-    }
-
-    .btn-share {
-        font-size: 0.8rem; /* 較小的字體 */
-        padding: 8px 12px; /* 較小的按鈕 */
-    }
-
-    .teacher-section {
-        display: none; /* 隱藏老師對話框 */
-    }
-
-    .teacher-result-container {
-        flex-direction: column;
-        text-align: center;
-        padding: 1rem;
-    }
-
-    .teacher-result-img {
-        width: 80px;
-    }
-
-    .teacher-result-text {
-        text-align: center;
-    }
-
-    .teacher-name {
-        text-align: center;
-    }
 }
