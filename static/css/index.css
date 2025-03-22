@@ -368,14 +368,30 @@ body {
   justify-content: center;
   margin-bottom: 20px;
 }
-
 /* 大K老師的照片 */
 .teacher-large-img {
-  width: 300px; /* 調整照片大小 */
-  height: auto;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 陰影 */
+  width: 100%; /* 讓圖片寬度適應容器 */
+  max-width: 300px; /* 限制最大寬度，避免圖片過大 */
+  height: auto; /* 高度自動調整，保持圖片比例 */
+  border-radius: 15px; /* 圓角效果 */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 陰影效果 */
+  object-fit: contain; /* 確保圖片完整顯示，不會被裁剪 */
 }
 
+/* 手機版樣式調整 */
+@media (max-width: 768px) {
+  .teacher-large-img {
+      max-width: 200px; /* 在手機上縮小圖片 */
+      margin-top: 20px; /* 增加上方間距，避免被切頭 */
+  }
+
+  .teacher-image-container {
+      display: flex;
+      justify-content: center; /* 讓圖片置中 */
+      align-items: center; /* 確保圖片垂直置中 */
+      padding: 10px; /* 增加內邊距 */
+  }
+}
 /* 對話框 */
 .intro-dialogue-box {
   background: #f9f7e8; /* 淺黃色背景 */
