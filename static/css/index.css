@@ -381,7 +381,7 @@ body {
 /* 手機版樣式調整 */
 @media (max-width: 768px) {
   .teacher-large-img {
-      max-width: 200px; /* 在手機上縮小圖片 */
+      max-width: 100px; /* 在手機上縮小圖片 */
       margin-top: 20px; /* 增加上方間距，避免被切頭 */
   }
 

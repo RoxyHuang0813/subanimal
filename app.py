@@ -246,34 +246,34 @@ def share():
 
 QUESTIONS = [
     {
-        'question': '看到便利商店出了新的限量商品，你的第一反應是？',
+        'question': '看到便利商店出了新的限量商品，你的反應是？',
         'options': [
-            {'text': '還是要上網查怎樣才是C/P值最高', 'type': 'owl'},
-            {'text': '只要我喜歡不用等打折，我現在就買!', 'type': 'cheetah'},
-            {'text': '限量耶，好東西一定要買來跟好朋友分享', 'type': 'raccoon'},
-            {'text': '說不定賣不完還會再打折，我再等等', 'type': 'squirrel'},
-            {'text': '主管之前好像有提過，我先幫他買看他要不要，', 'type': 'wolf'},
-            {'text': '昨天新聞有看到，好像很多人要搶，那還是買一下好了', 'type': 'peacock'}
+            {'text': '先上網查怎樣才是C/P值最高', 'type': 'owl'},
+            {'text': '我喜歡不用等打折，馬上買!', 'type': 'cheetah'},
+            {'text': '好東西就是要買給好朋友分享', 'type': 'raccoon'},
+            {'text': '我等賣不完打折再來買', 'type': 'squirrel'},
+            {'text': '買來轉賣給沒時間排隊的主管', 'type': 'wolf'},
+            {'text': '上新聞好熱門，我也來湊熱鬧', 'type': 'peacock'}
         ]
     },
     {
         'question': '今年年終發了獎金10萬元，你會？',
         'options': [
-            {'text': '先存起來，再想想要買什麼', 'type': 'squirrel'},
-            {'text': '比特幣現在是低點，這筆錢買了一定翻倍', 'type': 'cheetah'},
-            {'text': '我朋友說想吃教父牛排，發年終了我請他', 'type': 'raccoon'},
-            {'text': '30%存起來/30%買東西/剩下40%買股票好了', 'type': 'owl'},
-            {'text': '朋友想開店，要不然我拿這筆錢投資當股東好了', 'type': 'wolf'},
-            {'text': '我的手機跟家裡冰箱可以換新了', 'type': 'peacock'}
+            {'text': '先存起來後面再想', 'type': 'squirrel'},
+            {'text': '比特幣是低點，剛好有錢可以買', 'type': 'cheetah'},
+            {'text': '朋友想吃牛排，發年終換我請他', 'type': 'raccoon'},
+            {'text': '30%存起來/30%購物/剩下40%投資', 'type': 'owl'},
+            {'text': '回購公司股票當投資', 'type': 'wolf'},
+            {'text': '3C跟家電可以換新了', 'type': 'peacock'}
         ]
     },
     {
         'question': '面對投資虧損，你的反應是？',
         'options': [
             {'text': '我以後再也不投資了', 'type': 'squirrel'},
-            {'text': '應該趁低點加碼攤平才對', 'type': 'cheetah'},
-            {'text': '我問一下銀行的朋友看看', 'type': 'raccoon'},
-            {'text': '一定是我之前分析得不對，我再研究一下', 'type': 'owl'},
+            {'text': '趁低點加碼攤平', 'type': 'cheetah'},
+            {'text': '跟銀行的朋友討論一下', 'type': 'raccoon'},
+            {'text': '重新分析研究後再來處理', 'type': 'owl'},
             {'text': '該賣就賣，當斷則斷', 'type': 'wolf'},
             {'text': '不想面對，先放著以後再說', 'type': 'peacock'}
         ]
@@ -281,45 +281,45 @@ QUESTIONS = [
     {
         'question': '選擇理財商品時，你最重視？',
         'options': [
-            {'text': '風險越低越好，定存我也能接受', 'type': 'squirrel'},
+            {'text': '風險越低越好，定存最好', 'type': 'squirrel'},
             {'text': '高風險高回報,賭賭看', 'type': 'cheetah'},
-            {'text': '我朋友說那支會漲，可以買', 'type': 'raccoon'},
-            {'text': '我先分析一下歷年的投報率再決定', 'type': 'owl'},
-            {'text': '要能随時變現，像儲蓄險這種的我不買', 'type': 'wolf'},
-            {'text': '投顧老師經驗豐富，我聽他的', 'type': 'peacock'}
+            {'text': '朋友推薦跟著買', 'type': 'raccoon'},
+            {'text': '先等我好好分析完再決定', 'type': 'owl'},
+            {'text': '要能随時變現，儲蓄險不買', 'type': 'wolf'},
+            {'text': '是名人推薦我就買', 'type': 'peacock'}
         ]
     },
     {
         'question': '朋友向你借錢，你會？',
         'options': [
             {'text': '想辦法找理由拒絕', 'type': 'squirrel'},
-            {'text': '就算親兄弟還是要算利息哦', 'type': 'cheetah'},
-            {'text': '很為難，可能會勉強答應', 'type': 'raccoon'},
-            {'text': '我可以借，但是一定要簽借據', 'type': 'owl'},
-            {'text': '有什麼好康大家互相回饋一下也不是不行', 'type': 'wolf'},
-            {'text': '態度好的求求我，我可以考慮', 'type': 'peacock'}
+            {'text': '親兄弟也要算利息', 'type': 'cheetah'},
+            {'text': '很為難，勉強答應', 'type': 'raccoon'},
+            {'text': '簽借據才借', 'type': 'owl'},
+            {'text': '看他能用什麼來換?', 'type': 'wolf'},
+            {'text': '低聲下氣求我，才可能答應', 'type': 'peacock'}
         ]
     },
     {
         'question': '你如何定義「財務自由」？',
         'options': [
-            {'text': '我的存款夠用一輩子', 'type': 'squirrel'},
-            {'text': '錢多到想要什麼就能買什麼', 'type': 'cheetah'},
-            {'text': '錢只要夠用就好，家人朋友才是最重要的資產', 'type': 'raccoon'},
-            {'text': '當然是被動收入>支出', 'type': 'owl'},
-            {'text': '要有事業，沒有都是幫人打工哪來的自由', 'type': 'wolf'},
-            {'text': '像貴婦那樣令人羨慕的生活才自由', 'type': 'peacock'}
+            {'text': '存款夠用一輩子', 'type': 'squirrel'},
+            {'text': '想要什麼就能買什麼', 'type': 'cheetah'},
+            {'text': '錢只要夠用就好，家人朋友最重要', 'type': 'raccoon'},
+            {'text': '被動收入>支出', 'type': 'owl'},
+            {'text': '要有事業，沒有都是打工仔', 'type': 'wolf'},
+            {'text': '貴婦那種就是', 'type': 'peacock'}
         ]
     },
     {
         'question': '當你發現朋友的財務狀況比你好，你會？',
         'options': [
             {'text': '焦慮自己存款不足', 'type': 'squirrel'},
-            {'text': '我也有機會賺大錢，不會輸他', 'type': 'cheetah'},
+            {'text': '我要趕快賺大錢，不能輸', 'type': 'cheetah'},
             {'text': '問問朋友怎麼做到的', 'type': 'raccoon'},
-            {'text': '研究對方的投資策略並調整自己的計畫', 'type': 'owl'},
-            {'text': '回去想想怎麼樣才能賺更多錢', 'type': 'wolf'},
-            {'text': '錢就是要花在自己身上，存那麼多幹嘛', 'type': 'peacock'}
+            {'text': '研究他的投資策略並調整自己', 'type': 'owl'},
+            {'text': '思考如何才能賺更多錢', 'type': 'wolf'},
+            {'text': '錢就是要花，才不當守財奴', 'type': 'peacock'}
         ]
     },
     {
@@ -328,8 +328,8 @@ QUESTIONS = [
             {'text': '每天都差不多，滿固定的', 'type': 'squirrel'},
             {'text': '不一定，看情況調整', 'type': 'cheetah'},
             {'text': '如果朋友揪我我都會去', 'type': 'raccoon'},
-            {'text': '我有寫行事曆安排每一天的行程', 'type': 'owl'},
-            {'text': '我的年度目標有達到就好，不會規劃到每一天', 'type': 'wolf'},
+            {'text': '行事曆有安排每日行程', 'type': 'owl'},
+            {'text': '年度目標有達到就好，不用分太細', 'type': 'wolf'},
             {'text': '喜歡拓展社交圈，人多的地方都去', 'type': 'peacock'}
         ]
     },
@@ -339,41 +339,41 @@ QUESTIONS = [
             {'text': '反覆計算存款還夠不夠', 'type': 'squirrel'},
             {'text': '壓力越大越愛亂買', 'type': 'cheetah'},
             {'text': '找朋友訴苦', 'type': 'raccoon'},
-            {'text': '越分析越清楚，思考解決方法', 'type': 'owl'},
-            {'text': '想辦法找別人合作，借力使力', 'type': 'wolf'},
+            {'text': '越分析越清楚，多思考', 'type': 'owl'},
+            {'text': '找別人合作，借力使力', 'type': 'wolf'},
             {'text': '先不管，轉移注意力', 'type': 'peacock'}
         ]
     },
     {
-        'question': '當你聽到一種新的理財工具時，你的第一反應是？',
+        'question': '聽到一種新的理財工具時的第一反應？',
         'options': [
             {'text': '我只選保本型商品', 'type': 'squirrel'},
             {'text': '有趣，先買一點試試看', 'type': 'cheetah'},
             {'text': '跟家人朋友一起討論', 'type': 'raccoon'},
-            {'text': '要做功課，詳細分析才知道好不好', 'type': 'owl'},
+            {'text': '要做功課，詳細分析才知道', 'type': 'owl'},
             {'text': '會先問一些專業人士的意見', 'type': 'wolf'},
             {'text': '如果有大銀行推薦應該沒問題', 'type': 'peacock'}
         ]
     },
     {
-        'question': '感覺經濟衰退時，你的應對策略是？',
+        'question': '感覺經濟衰退時會怎麼做？',
         'options': [
             {'text': '減少消費，節省到極限', 'type': 'squirrel'},
             {'text': '多買樂透看會不會中頭獎', 'type': 'cheetah'},
             {'text': '多跟朋友聊聊看他們的情況', 'type': 'raccoon'},
-            {'text': '重新計算自已的資產看看會不會有風險', 'type': 'owl'},
-            {'text': '就等這個機會買法拍屋，以後一定賺', 'type': 'wolf'},
-            {'text': '跟平常一樣，又不一定會發生，', 'type': 'peacock'}
+            {'text': '重新計算自已的資產再決定', 'type': 'owl'},
+            {'text': '就在等這個機會買法拍屋', 'type': 'wolf'},
+            {'text': '不管，又不一定會發生，', 'type': 'peacock'}
         ]
     },
     {
-        'question': '計畫出國旅行時，你優先考慮？',
+        'question': '如果要去旅行，你的想法是？',
         'options': [
             {'text': '預算最重要，超出太多就不考慮了', 'type': 'squirrel'},
             {'text': '就說走就走，機票買了再說！', 'type': 'cheetah'},
-            {'text': '一定要問朋友推薦，有人去過才不踩雷', 'type': 'raccoon'},
-            {'text': '詳細比較機票、住宿、行程，出國也要精打細算。', 'type': 'owl'},
-            {'text': '旅行能不能順便開拓人脈或找到商機', 'type': 'wolf'},
+            {'text': '先問朋友，有人去過不踩雷', 'type': 'raccoon'},
+            {'text': '詳細比較C/P值，出國也要精打細算。', 'type': 'owl'},
+            {'text': '旅行很無聊，有助於事業才考慮去', 'type': 'wolf'},
             {'text': '網美推薦的熱門景點，一定要住五星級飯店', 'type': 'peacock'}
         ]
     }
