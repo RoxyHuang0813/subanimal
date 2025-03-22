@@ -414,6 +414,35 @@ body {
 .back-btn:hover {
   background-color: #6b4421; /* 深色木紋 */
   transform: scale(1.05); /* 懸停時放大 */
+
+  /* 手機版樣式調整 */
+@media (max-width: 768px) {
+  .teacher-intro-content {
+      padding: 15px; /* 減少內邊距 */
+      max-width: 90%; /* 讓內容更貼合螢幕 */
+  }
+
+  .teacher-large-img {
+      width: 120px; /* 縮小照片 */
+  }
+
+  .intro-dialogue-box {
+      padding: 15px; /* 減少內邊距 */
+  }
+
+  .intro-dialogue-box h2 {
+      font-size: 1.3rem; /* 縮小標題字體 */
+  }
+
+  .intro-dialogue-box p {
+      font-size: 0.9rem; /* 縮小正文字體 */
+  }
+
+  .back-btn {
+      padding: 8px 16px; /* 縮小按鈕 */
+      font-size: 14px; /* 縮小按鈕字體 */
+  }
+}
 }
 /* 讓大K老師圖像的游標變成手的形狀 */
 .character-img {
