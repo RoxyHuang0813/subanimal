@@ -176,6 +176,44 @@ body {
   background: #6b4421; /* 深色木紋 */
 }
 
+
+.teacher-intro-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.teacher-intro-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+}
+
+.back-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.back-btn:hover {
+  background-color: #0056b3;
+}
+
 /* 手機版專用樣式調整 */
 @media (max-width: 768px) {
   .result-card {
@@ -286,7 +324,7 @@ body {
   min-height: 150px; /* 最小高度 */
 }
 
-//* 對話框文字 */
+
 .dialogue-text {
   margin: 10px 0;
   font-size: 1.2rem;
@@ -297,6 +335,94 @@ body {
   line-height: 1.6; /* 增加行高 */
   padding: 10px; /* 增加內邊距 */
 }
+
+/* 大K老師介紹區塊 */
+.teacher-intro-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* 半透明黑色背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.teacher-intro-content {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 陰影效果 */
+}
+
+/* 照片容器 */
+.teacher-image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* 大K老師的照片 */
+.teacher-large-img {
+  width: 300px; /* 調整照片大小 */
+  height: auto;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 陰影 */
+}
+
+/* 對話框 */
+.intro-dialogue-box {
+  background: #f9f7e8; /* 淺黃色背景 */
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #8b5a2b; /* 邊框 */
+  margin-bottom: 20px;
+  text-align: center; /* 文字置中 */
+}
+
+.intro-dialogue-box h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.intro-dialogue-box p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+/* 上一頁按鈕 */
+.back-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #8b5a2b; /* 木紋顏色 */
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.back-btn:hover {
+  background-color: #6b4421; /* 深色木紋 */
+  transform: scale(1.05); /* 懸停時放大 */
+}
+/* 讓大K老師圖像的游標變成手的形狀 */
+.character-img {
+  width: 200px;
+  height: auto;
+  animation: float 3s ease-in-out infinite;
+  cursor: pointer; /* 游標變成手的形狀 */
+}
+
 
 /* 響應式設計 */
 @media (max-width: 768px) {

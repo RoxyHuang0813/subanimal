@@ -121,15 +121,8 @@
     font-style: italic;
 }
 
-/* 分享圖卡區塊 */
-.share-section {
-    margin-top: 1rem; /* 向上移動 */
-    margin-bottom: 2rem; /* 與重新測驗按鈕的間距 */
-    padding: 0 20px; /* 左右內邊距 */
-    text-align: center; /* 內容居中 */
-}
 
-/* 分享圖卡 */
+/* 分享圖卡區塊 */
 .share-card {
     background: rgba(255, 255, 255, 0.95); /* 白色背景 */
     padding: clamp(1rem, 5vw, 2rem); /* 動態調整內邊距 */
@@ -141,8 +134,58 @@
     text-align: center;
 }
 
+/* 動物類型 - 綠色 */
+.card-content h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: clamp(1.2rem, 3vw, 1.5rem); /* 稍小的字體 */
+    color: #4CAF50; /* 森林綠色 */
+    margin-bottom: 1rem;
+}
+
+/* 動物名稱 - 金色 */
+.card-content .animal-name {
+    font-family: 'Rubik', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2rem); /* 中等字體 */
+    color: #FFD700; /* 金色 */
+    margin-bottom: 1rem; /* 與隨機語錄的間距 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 隨機語錄 - 深紅色 */
+.card-content .quote {
+    font-size: clamp(2rem, 5vw, 2.5rem) !important; /* 提高優先級 *//* 最大的字體 */
+    color: #8B0000; /* 深紅色 */
+    font-style: italic;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* QR CODE 容器 */
+.qr-code-container {
+    margin-top: 1rem; /* 與上方 LOGO 的間距 */
+    text-align: center;
+}
+
+.qr-code-image {
+    width: clamp(100px, 25vw, 150px); /* 動態調整 QR CODE 大小 */
+    height: auto;
+    border-radius: 10px; /* 圓角效果 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 陰影效果 */
+}
+
+/* QR CODE 下方文字 */
+.qr-code-text {
+    font-size: clamp(0.9rem, 3vw, 1.2rem); /* 動態調整字體大小 */
+    color: #444; /* 文字顏色 */
+    margin-top: 0.5rem; /* 與 QR CODE 圖片的間距 */
+    font-weight: 500; /* 字體粗細 */
+}
+
+
+/* 圖卡內容 */
 .card-content {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .animal-image-share {
@@ -153,33 +196,32 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.card-content h3 {
-    font-family: 'Rubik', sans-serif;
-    font-size: clamp(1.2rem, 4vw, 1.5rem); /* 動態調整字體大小 */
-    color: #4CAF50; /* 森林綠色 */
-    margin-bottom: 1rem;
-}
 
-.card-content .quote {
-    font-size: clamp(0.9rem, 3vw, 1.2rem); /* 動態調整字體大小 */
-    color: #8B0000; /* 深紅色 */
-    font-style: italic;
-    margin-bottom: 1rem;
-    font-weight: 500;
-}
 
-.logo-container {
-    margin-top: 1.5rem;
+/* QR CODE 容器 */
+.qr-code-container {
+    margin-top: 1rem; /* 與上方 LOGO 的間距 */
     text-align: center;
 }
 
-.logo-image {
-    width: clamp(80px, 20vw, 120px); /* 動態調整 LOGO 大小 */
+.qr-code-image {
+    width: clamp(100px, 25vw, 150px); /* 動態調整 QR CODE 大小 */
     height: auto;
-    opacity: 0.9;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    border-radius: 10px; /* 圓角效果 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 陰影效果 */
 }
 
+
+/* QR CODE 下方文字 */
+.qr-code-text {
+    font-size: clamp(0.9rem, 3vw, 1.2rem); /* 動態調整字體大小 */
+    color: #f3f0f0; /* 文字顏色 */
+    margin-top: 0.5rem; /* 與 QR CODE 圖片的間距 */
+    font-weight: 500; /* 字體粗細 */
+}
+
+
+/* 分享按鈕容器 */
 .share-buttons {
     display: flex;
     justify-content: center;
@@ -208,4 +250,30 @@
 
 .btn-share i {
     font-size: 1.2rem;
+}
+/* 重新測驗按鈕容器 */
+.retest-button {
+    margin-top: 2rem; /* 與上方按鈕的間距 */
+    text-align: center;
+}
+
+/* 重新測驗按鈕 */
+.retest-button .btn-share {
+    background: linear-gradient(135deg, #8B5A2B, #FFD700); /* 木紋色到金色 */
+    color: white;
+    padding: clamp(8px, 3vw, 12px) clamp(12px, 5vw, 20px); /* 動態調整按鈕大小 */
+    font-size: clamp(0.8rem, 3vw, 1rem); /* 動態調整字體大小 */
+    border: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    display: inline-flex; /* 讓按鈕內容居中 */
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-decoration: none; /* 移除連結底線 */
+}
+
+.retest-button .btn-share:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }

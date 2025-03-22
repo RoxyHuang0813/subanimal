@@ -59,26 +59,50 @@
     </div>
 
     <!-- 主內容區 -->
-    <div id="main-section" class="main-container">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" 
-             alt="LOGO" 
-             class="logo"
-             onload="console.log('LOGO loaded')"
-             onerror="console.error('LOGO load failed')">
-        <div class="character">
-            <img src="{{ url_for('static', filename='images/teacher_k.png') }}" 
-                 alt="大K老師" 
-                 class="character-img">
-        </div>
-        <div class="dialogue-box">
-            <p class="dialogue-text"></p>
-        </div>
-        <div id="quiz-section" class="quiz-container">
-            <a href="/test" class="start-btn">開始測驗</a>
-        </div>
-    </div>
+<div id="main-section" class="main-container">
+  <img src="{{ url_for('static', filename='images/logo.png') }}" 
+       alt="LOGO" 
+       class="logo"
+       onload="console.log('LOGO loaded')"
+       onerror="console.error('LOGO load failed')">
+  <div class="character">
+      <img src="{{ url_for('static', filename='images/teacher_k.png') }}" 
+           alt="大K老師" 
+           class="character-img">
+  </div>
+  <div class="dialogue-box">
+      <p class="dialogue-text"></p>
+  </div>
+  <div id="quiz-section" class="quiz-container">
+      <a href="/test" class="start-btn">開始測驗</a>
+  </div>
+</div>
 
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-    <audio id="type-sound" src="{{ url_for('static', filename='sounds/type.wav') }}"></audio>
+ <!-- 大K老師的介紹區塊 -->
+ <div id="teacher-intro-section" class="teacher-intro-section" style="display: none;">
+  <div class="teacher-intro-content">
+      <!-- 大K老師的照片 -->
+      <div class="teacher-image-container">
+        <img src="{{ url_for('static', filename='images/teacher_k_large.png') }}" 
+             alt="大K老師" 
+             class="teacher-large-img">
+    </div>
+      
+     <!-- 對話框 -->
+     <div class="intro-dialogue-box">
+      <h2>大K老師</h2>
+      <p><strong>大K老師</strong>，潛意識無限學院創辦人</p>曾是銀行高管，因錯誤決策負債千萬。</p>
+      <p>透過催眠療癒，他成功解開內心困境，實現人生翻盤。</p>
+      <p>如今，他專注幫助人們透過潛意識療癒</p>改變金錢、關係、人生困境，</p>讓學員發現深藏的內在信念並重寫人生腳本。</p>
+      <p>想改變，來<span class="highlight">潛意識無限學院</span>，讓<strong>大K老師帶你突破限制！</strong></p>
+  </div>
+      
+      <!-- 上一頁按鈕 -->
+      <button id="back-to-index-btn" class="back-btn">上一頁</button>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+<audio id="type-sound" src="{{ url_for('static', filename='sounds/type.wav') }}"></audio>
 </body>
 </html>

@@ -1,4 +1,3 @@
-// static/js/index.js
 document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById('loader');
     const forestAnimation = document.getElementById('forest-animation');
@@ -119,6 +118,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
             typeWriter();
+        }
+    }
+
+    // 獲取大K老師的圖像元素
+    const teacherK = document.querySelector('.character-img'); // 使用 class 選擇器
+    if (teacherK) {
+        teacherK.addEventListener('click', showTeacherIntro);
+    }
+
+    // 獲取「上一頁」按鈕元素
+    const backToIndexBtn = document.getElementById('back-to-index-btn');
+    if (backToIndexBtn) {
+        backToIndexBtn.addEventListener('click', goBackToIndex);
+    }
+
+    // 顯示大K老師的介紹
+    function showTeacherIntro() {
+        const teacherIntroSection = document.getElementById('teacher-intro-section');
+        const mainSection = document.getElementById('main-section');
+        if (teacherIntroSection && mainSection) {
+            mainSection.style.display = 'none'; // 隱藏主內容區
+            teacherIntroSection.style.display = 'flex'; // 顯示大K老師的介紹
+        }
+    }
+
+    // 返回首頁
+    function goBackToIndex() {
+        const teacherIntroSection = document.getElementById('teacher-intro-section');
+        const mainSection = document.getElementById('main-section');
+        if (teacherIntroSection && mainSection) {
+            teacherIntroSection.style.display = 'none'; // 隱藏大K老師的介紹
+            mainSection.style.display = 'flex'; // 顯示主內容區
         }
     }
 

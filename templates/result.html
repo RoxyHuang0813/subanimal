@@ -13,10 +13,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Rubik:wght@500&display=swap" rel="stylesheet">
 
-=======
+
     <!-- 引入 Font Awesome 圖標庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
->>>>>>> 116f2d2 (新增語錄分享圖卡)
+
     <style>
         :root {
             --primary-color: #8B5A2B; /* 木紋色 */
@@ -409,7 +409,6 @@
             display: flex;
             flex-wrap: wrap;
 
-=======
             justify-content: center;
             gap: 1rem;
         }
@@ -466,7 +465,7 @@
             font-weight: 500; /* 加粗字體 */
         }
 
-        <style>
+
     /* 其他現有的 CSS 樣式 */
     :root {
         --primary-color: #8B5A2B;
@@ -474,15 +473,8 @@
         --accent-color: #FFD700;
     }
 
-    body {
-        /* 現有的 body 樣式 */
-    }
-
-    /* 其他樣式... */
-
-    /* 將這段 CSS 添加到最後 */
-    
-    
+ 
+   
 
 /* 圖卡內容 */
 .card-content {
@@ -664,7 +656,6 @@
 </head>
 <body>
 
-=======
    <!-- LOGO 連結 -->
    <a href="https://www.facebook.com/subconscious.oo" class="logo-link" target="_blank" rel="noopener noreferrer">
     <img src="{{ url_for('static', filename='images/logo.png') }}" alt="潛意識無限學院" class="logo">
@@ -707,6 +698,7 @@
 <!-- 分享圖卡區塊 -->
 <div class="share-section">
     <div class="share-card">
+        <!-- 圖卡內容 -->
         <div class="card-content">
             <!-- 動物小圖 -->
             <img src="{{ url_for('static', filename=animal + '.png') }}" 
@@ -718,13 +710,19 @@
             <h3 class="animal-name">{{ animal_name }}</h3>
             <!-- 隨機語錄 - 深紅色 -->
             <p class="quote">{{ random_quote }}</p>
-            <!-- 新增 LOGO -->
-            <div class="logo-container">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" 
-                     alt="潛意識無限學院" 
-                     class="logo-image">
-            </div>
         </div>
+
+   
+        <!-- QR CODE 容器 -->
+        <div class="qr-code-container">
+            <img src="{{ url_for('static', filename='images/qr-code.png') }}" 
+                 alt="QR Code" 
+                 class="qr-code-image">
+            <!-- QR CODE 下方文字 -->
+            <p class="qr-code-text">你的金錢性格，竟然藏著一種動物靈魂？！快來測測看！</p>
+        </div>
+
+        <!-- 分享按鈕 -->
         <div class="share-buttons">
             <button onclick="downloadCard()" class="btn btn-share">
                 <i class="fas fa-download"></i> 下載圖卡
@@ -737,14 +735,19 @@
 </div>
 
 <!-- 重新測驗按鈕 -->
-<a href="/" class="btn btn-secondary">重新測驗</a>
+<div class="retest-button">
+    <a href="/" class="btn btn-share">
+        <i class="fas fa-redo"></i> 重新測驗
+    </a>
+</div>
 
 <!-- 新增音效 -->
 <audio id="win-sound" src="{{ url_for('static', filename='sounds/win.mp3') }}"></audio>
 
+<!-- 引入 html2canvas 用於下載圖卡 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-    // 下載圖卡功能（保持不變）
+    // 下載圖卡功能
     function downloadCard() {
         const card = document.querySelector('.share-card');
         html2canvas(card).then(canvas => {
@@ -755,7 +758,7 @@
         });
     }
 
-    // 分享到社群功能（改進版）
+    // 分享到社群功能
     function shareCard() {
         const card = document.querySelector('.share-card');
         html2canvas(card).then(canvas => {
@@ -766,26 +769,14 @@
                     title: '我的金錢動物原型',
                     text: '快來看看你的金錢動物原型是什麼！',
                 };
-
-                // 檢查瀏覽器是否支援分享功能
                 if (navigator.canShare && navigator.canShare(shareData)) {
-                    navigator.share(shareData)
-                        .then(() => {
-                            console.log('分享成功！');
-                        })
-                        .catch((error) => {
-                            console.error('分享失敗:', error);
-                            alert('分享失敗，請嘗試其他方式分享。');
-                        });
+                    navigator.share(shareData);
                 } else {
-                    // 如果不支援分享功能，改用下載圖卡
-                    alert('您的瀏覽器不支援分享功能，已改為下載圖卡。');
-                    downloadCard(); // 直接呼叫下載功能
+                    alert('您的瀏覽器不支援分享功能，請使用其他方式分享。');
                 }
             });
-        }).catch((error) => {
-            console.error('生成圖卡失敗:', error);
-            alert('生成圖卡失敗，請稍後再試。');
         });
     }
 </script>
+</body>
+</html>
