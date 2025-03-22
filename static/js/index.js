@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainSection = document.getElementById('main-section');
     const forestVideo = document.getElementById('forest-video');
     const skipBtn = document.querySelector('.skip-animation');
-    
+    let typeWriterTimeout = null; // 用於儲存打字機效果的 setTimeout ID
+
     // 初始化頁面
     setTimeout(() => loader.style.display = 'none', 1000); // 隱藏載入動畫
 
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     forestVideo.addEventListener('ended', handleAnimationEnd);
     forestVideo.addEventListener('error', handleAnimationEnd);
-    
+
     // 跳過按鈕
     skipBtn.addEventListener('click', handleAnimationEnd);
 
@@ -31,42 +32,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 800);
     }
 
+    // 重新測驗按鈕
+    const startBtn = document.querySelector('.start-btn');
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            // 重置頁面狀態
+            resetPage();
+            // 清除所有動態內容
+            clearDynamicContent();
+            // 重定向到測驗頁面
+            window.location.href = '/test';
+        });
+    }
 
-
-   
-
-        // ==================================================
-        // 以下是新增的程式碼（從跳過按鈕之後開始）
-        // ==================================================
-    
-        // 重新測驗按鈕
-        const startBtn = document.querySelector('.start-btn');
-        if (startBtn) {
-            startBtn.addEventListener('click', () => {
-                // 重置頁面狀態
-                resetPage();
-                window.location.href = '/test';
-            });
+    // 重置頁面狀態
+    function resetPage() {
+        const dialogueText = document.querySelector('.dialogue-text');
+        if (dialogueText) {
+            dialogueText.textContent = ''; // 清空對話框內容
         }
-    
-        // 重置頁面狀態
-        function resetPage() {
-            const dialogueText = document.querySelector('.dialogue-text');
-            if (dialogueText) {
-                dialogueText.textContent = ''; // 清空對話框內容
-            }
-            if (mainSection) {
-                mainSection.style.display = 'none'; // 隱藏主內容區
-                mainSection.style.opacity = '0'; // 重置透明度
-                mainSection.classList.remove('active'); // 移除 active 類
-            }
-            if (forestAnimation) {
-                forestAnimation.style.display = 'flex'; // 顯示動畫區
-                forestAnimation.style.opacity = '1'; // 重置透明度
-            }
+        if (mainSection) {
+            mainSection.style.display = 'none'; // 隱藏主內容區
+            mainSection.style.opacity = '0'; // 重置透明度
+            mainSection.classList.remove('active'); // 移除 active 類
         }
-    
-       
+        if (forestAnimation) {
+            forestAnimation.style.display = 'flex'; // 顯示動畫區
+            forestAnimation.style.opacity = '1'; // 重置透明度
+        }
+    }
+
+    // 清除所有動態內容
+    function clearDynamicContent() {
+        const teacherSection = document.querySelector('.teacher-result-section');
+        if (teacherSection) {
+            teacherSection.style.display = 'none'; // 隱藏大K老師的對話框
+            teacherSection.style.opacity = '0'; // 重置透明度
+        }
+    }
+
     // 打字機效果（分段顯示）
     function startDialogue() {
         const text = [
@@ -77,6 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
         const dialogueText = document.querySelector('.dialogue-text');
         if (dialogueText) {
+            // 清除之前的打字機效果
+            if (typeWriterTimeout) {
+                clearTimeout(typeWriterTimeout);
+                typeWriterTimeout = null;
+            }
+
             dialogueText.textContent = ''; // 清空原有內容
             let lineIndex = 0;
             let charIndex = 0;
@@ -92,13 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             typeSound.currentTime = 0; // 重置音效
                             typeSound.play(); // 播放打字音效
                         }
-                        setTimeout(typeWriter, 100); // 控制打字速度
+                        typeWriterTimeout = setTimeout(typeWriter, 100); // 控制打字速度
                     } else {
                         // 換行並顯示下一段文字
                         dialogueText.innerHTML += '<br>'; // 使用 <br> 換行
                         lineIndex++;
                         charIndex = 0;
-                        setTimeout(typeWriter, 500); // 換行後稍作停頓
+                        typeWriterTimeout = setTimeout(typeWriter, 500); // 換行後稍作停頓
                     }
                 } else {
                     // 顯示測驗按鈕
@@ -111,22 +121,22 @@ document.addEventListener('DOMContentLoaded', () => {
             typeWriter();
         }
     }
-    
-        // 音效處理
-        const bgMusic = document.getElementById('bg-music');
-        if (bgMusic) {
-            bgMusic.volume = 0.6;
-            bgMusic.play().catch(() => {
-                const audioPrompt = document.getElementById('audio-prompt');
-                if (audioPrompt) {
-                    audioPrompt.style.display = 'block';
-                }
-            });
-        }
-    
-        document.body.addEventListener('click', () => {
-            if (bgMusic) {
-                bgMusic.play().catch(console.error);
+
+    // 音效處理
+    const bgMusic = document.getElementById('bg-music');
+    if (bgMusic) {
+        bgMusic.volume = 0.6;
+        bgMusic.play().catch(() => {
+            const audioPrompt = document.getElementById('audio-prompt');
+            if (audioPrompt) {
+                audioPrompt.style.display = 'block';
             }
         });
+    }
+
+    document.body.addEventListener('click', () => {
+        if (bgMusic) {
+            bgMusic.play().catch(console.error);
+        }
     });
+});

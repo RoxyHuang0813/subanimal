@@ -12,8 +12,11 @@
     <title>測驗結果</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Rubik:wght@500&display=swap" rel="stylesheet">
+
+=======
+    <!-- 引入 Font Awesome 圖標庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+>>>>>>> 116f2d2 (新增語錄分享圖卡)
     <style>
         :root {
             --primary-color: #8B5A2B; /* 木紋色 */
@@ -22,7 +25,7 @@
         }
 
         body {
-            background: url("{{ url_for('static', filename='images/forest-bg.jpg') }}") no-repeat center center/cover; /* 森林背景圖 */
+            background: url("{{ url_for('static', filename='images/forest-bg.jpg') }}") no-repeat center center/cover;
             color: #333;
             font-family: 'Noto Sans TC', sans-serif;
             min-height: 100vh;
@@ -34,10 +37,108 @@
             text-align: center;
         }
 
+        .result-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            max-width: min(800px, 90vw);
+            width: 100%;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: cardEnter 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            border: 2px solid var(--primary-color);
+        }
+/* 圖卡樣式 */
+.share-card {
+            background: url("{{ url_for('static', filename='images/forest-card-bg.jpg') }}") no-repeat center center/cover;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-content {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .animal-image-share {
+            width: 100px;
+            height: auto;
+            margin-bottom: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-content h3 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-content .quote {
+            font-size: 1.2rem;
+            color: #333;
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .share-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: -1;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-share {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 20px;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            border: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-share:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
         /* LOGO連結樣式 */
         .logo-link {
             display: inline-block;
             transition: transform 0.3s ease;
+            text-decoration: none; /* 移除底線 */
         }
         .logo-link:hover {
             transform: scale(1.05) rotate(-3deg);
@@ -46,24 +147,34 @@
         .logo {
             width: min(150px, 30vw);
             height: auto;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            animation: float 3s ease-in-out infinite; /* 新增浮動動畫 */
         }
 
-        .result-card {
-            background: rgba(255, 255, 255, 0.9); /* 半透明白色背景 */
-            backdrop-filter: blur(10px);
-            max-width: min(600px, 90vw);
-            width: 100%;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            transform: translateY(20px);
-            opacity: 0;
-            animation: cardEnter 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-            border: 2px solid var(--primary-color); /* 木紋邊框 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
+        .logo-hint {
+            font-size: 1rem;
+            color: var(--accent-color); /* 金色 */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 增加陰影讓文字更清晰 */
+            margin-top: 0.5rem;
+            text-align: center;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+        .logo-link:hover .logo-hint {
+            opacity: 1;
+        }
+
+        .logo-hint p {
+            margin: 0.3rem 0; /* 調整段落間距 */
+        }
+
+        
         @keyframes cardEnter {
             to {
                 transform: translateY(0);
@@ -225,86 +336,352 @@
             50% { opacity: 1; transform: scale(1); }
         }
 
-        /* 響應式調整 */
-        @media (max-width: 768px) {
-            .result-card {
-                padding: 1.5rem;
-            }
+        /* 響應式調整 - 手機版樣式 */
+@media (max-width: 768px) {
+    /* 調整結果卡片 */
+    .result-card {
+        padding: 1.5rem;
+    }
 
-            h1.animal-title {
-                font-size: 2.2rem;
-            }
+    /* 調整動物標題 */
+    h1.animal-title {
+        font-size: 2.2rem;
+    }
 
-            h1.animal-title::before,
-            h1.animal-title::after {
-                width: 30px;
-            }
+    h1.animal-title::before,
+    h1.animal-title::after {
+        width: 30px;
+    }
 
-            h1.animal-title::before {
-                left: -40px;
-            }
+    h1.animal-title::before {
+        left: -40px;
+    }
 
-            h1.animal-title::after {
-                right: -40px;
-            }
+    h1.animal-title::after {
+        right: -40px;
+    }
 
-            .teacher-img {
-                width: 80px;
-            }
+    /* 調整老師圖片 */
+    .teacher-img {
+        width: 80px;
+    }
 
-            .teacher-dialogue {
-                font-size: 1rem;
-            }
-        }
+    /* 調整老師對話框 */
+    .teacher-dialogue {
+        font-size: 1rem;
+    }
+
+    /* 調整分享卡片 */
+    .share-card {
+        max-width: 90%; /* 讓卡片更窄 */
+        padding: 1rem; /* 減少內邊距 */
+    }
+
+    /* 調整分享卡片中的動物圖片 */
+    .animal-image-share {
+        width: 80px; /* 縮小圖片 */
+        margin-bottom: 0.5rem; /* 減少間距 */
+    }
+
+    /* 調整分享卡片中的標題 */
+    .card-content h3 {
+        font-size: 1.2rem; /* 縮小標題字體 */
+    }
+
+    /* 調整分享卡片中的語錄 */
+    .card-content .quote {
+        font-size: 1rem; /* 縮小語錄字體 */
+    }
+
+    /* 調整分享卡片中的 LOGO 容器 */
+    .logo-container {
+        margin-top: 1rem; /* 減少間距 */
+    }
+
+    /* 調整分享卡片中的 LOGO 圖片 */
+    .logo-image {
+        width: 80px; /* 縮小 LOGO */
+    }
+}
+        /* 新增分享按鈕樣式 */
         .share-buttons {
             margin-top: 2rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+
+=======
             justify-content: center;
+            gap: 1rem;
         }
 
-        .btn-facebook {
-            background-color: #1877f2;
+        .btn-share {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
+            padding: 12px 20px;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            border: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .btn-line {
-            background-color: #00b900;
-            color: white;
+        .btn-share:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
-        .btn-institute {
-            background-color: var(--primary-color);
-            color: white;
+        .btn-share i {
+            font-size: 1.2rem;
         }
 
-        .btn-facebook:hover, .btn-line:hover, .btn-institute:hover {
-            opacity: 0.9;
+      
+
+        .card-content {
+            margin-bottom: 1.5rem;
         }
+
+        .animal-image-share {
+            width: 150px; /* 調整圖片大小 */
+            height: auto;
+            margin-bottom: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-content h3 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 1.5rem;
+            color: var(--secondary-color); /* 森林綠色 */
+            margin-bottom: 1rem;
+        }
+
+        .card-content .quote {
+            font-size: 1.2rem;
+            color: #333; /* 改為深色，確保清晰可見 */
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-weight: 500; /* 加粗字體 */
+        }
+
+        <style>
+    /* 其他現有的 CSS 樣式 */
+    :root {
+        --primary-color: #8B5A2B;
+        --secondary-color: #4CAF50;
+        --accent-color: #FFD700;
+    }
+
+    body {
+        /* 現有的 body 樣式 */
+    }
+
+    /* 其他樣式... */
+
+    /* 將這段 CSS 添加到最後 */
     
+    
+
+/* 圖卡內容 */
+.card-content {
+    background: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+    padding: 1.5rem;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative; /* 確保內容在木框上方 */
+    z-index: 1;
+}
+
+/* 動物小圖 */
+.animal-image-share {
+    width: 100px;
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 動物類型標題 - 綠色 */
+.card-content .animal-type {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.2rem; /* 調整字體大小 */
+    color: var(--secondary-color); /* 綠色 */
+    margin-bottom: 0.5rem; /* 調整間距 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 動物名稱 - 金色 */
+.card-content .animal-name {
+    font-family: 'Rubik', sans-serif;
+    font-size: 2.2rem; /* 調整字體大小 */
+    color:  #eec00ce3; /* 金色 */
+    margin-bottom: 1rem; /* 調整間距 */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 隨機語錄 - 深紅色 */
+.card-content .quote {
+    font-size: 1.8rem; /* 調整字體大小 */
+    color: #8B0000; /* 深紅色 */
+    font-style: italic;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* LOGO 容器 */
+.logo-container {
+    margin-top: 1.5rem; /* 調整與上方內容的間距 */
+    text-align: center; /* 居中顯示 */
+}
+
+/* LOGO 圖片 */
+.logo-image {
+    width: 120px; /* 調整 LOGO 大小 */
+    height: auto;
+    opacity: 0.9; /* 調整透明度 */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2)); /* 添加陰影 */
+}
+
+
+        .card-content h3 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 1.5rem;
+            color: var(--secondary-color); /* 森林綠色 */
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-content .quote {
+            font-size: 1.2rem;
+            color: #333;
+            font-style: italic;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+
+  /* 分享圖卡樣式 */
+  .share-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 2rem;
+            text-align: center;
+            max-width: 400px; /* 限制圖卡寬度 */
+            width: 100%;
+        }
+
+
+   /* 圖卡樣式 */
+   .share-card {
+    background: url("{{ url_for('static', filename='images/forest-card-bg.jpg') }}") no-repeat center center/cover;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+
+    .share-section {
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .card-content {
+        margin-bottom: 1.5rem;
+    }
+
+    .animal-image-share {
+        width: 150px;
+        height: auto;
+        margin-bottom: 1rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-content h3 {
+        font-family: 'Rubik', sans-serif;
+        font-size: 1.5rem;
+        color: var(--secondary-color);
+        margin-bottom: 1rem;
+    }
+
+    .card-content .quote {
+        font-size: 1.2rem;
+        color: #333;
+        font-style: italic;
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
+
+    .share-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .btn-share {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 12px 20px;
+        font-size: clamp(0.9rem, 3vw, 1rem);
+        border: none;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-share:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-share i {
+        font-size: 1.2rem;
+    }
+
+
+</style>
 
     </style>
 
 </head>
 <body>
-    <!-- 新增LOGO連結 -->
-   <a href="https://www.facebook.com/subconscious.oo" 
-       class="logo-link"
-       target="_blank"
-       rel="noopener noreferrer">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" 
-             alt="潛意識無限學院" 
-             class="logo">
-    </a>
-    
+
+=======
+   <!-- LOGO 連結 -->
+   <a href="https://www.facebook.com/subconscious.oo" class="logo-link" target="_blank" rel="noopener noreferrer">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="潛意識無限學院" class="logo">
+    <div class="logo-hint">
+        <p>你對金錢的選擇，其實是潛意識在說話</p>
+        <p>點擊 LOGO，發現如何改變財務命運！</p>
+    </div>
+</a>
+
+<!-- 結果卡片 -->
+<div class="result-card">
+
     <div class="result-content">
         <!-- 動物類型區塊 -->
         <div class="animal-container">
             <h2>你的金錢動物原型是...</h2>
-            <img src="{{ url_for('static', filename=animal + '.png') }}" 
-                 alt="{{ animal_name }}" 
-                 class="animal-image">
+            <img src="{{ url_for('static', filename=animal + '.png') }}" alt="{{ animal_name }}" class="animal-image">
             <div class="animal-title-box">
                 <h1 class="animal-title">{{ animal_name }}</h1>
                 <!-- 金幣閃光效果 -->
@@ -312,109 +689,93 @@
                 <div class="coin-effect" style="top: -20px; right: -10px;"></div>
             </div>
             <!-- 重新測驗按鈕 -->
-            <a href="/" class="btn btn-secondary">重新測驗</a>
+            <a href="{{ url_for('story', animal=animal) }}" class="btn btn-secondary">聽聽它的故事</a>
         </div>
-    
-        <!-- 新增大K老師對話框區塊 -->
-        <div class="teacher-result-section">
-            <div class="teacher-result-container">
-                <img src="{{ url_for('static', filename='images/teacher_k.png') }}" 
-                     alt="大K老師" 
-                     class="teacher-result-img">
-                <div class="teacher-result-text">
-                    <p class="result-text">恭喜你完成測驗！<br>快把專屬你的財富性格分享給朋友吧！</p>
-                    <p class="teacher-name">—— 大K老師</p>
+
+        <!-- 個性化分享圖卡 -->
+        <div class="share-section">
+            <div class="share-card">
+                <div class="card-content">
+                    <!-- 動物小圖 -->
+                    <img src="{{ url_for('static', filename=animal + '.png') }}" 
+                         alt="{{ animal_name }}" 
+                         class="animal-image-share">
+                   <!-- 動物類型 - 綠色 -->
+                   <h3 class="animal-type">你的金錢動物原型是</h3>
+                   <!-- 動物名稱 - 金色 -->
+                   <h3 class="animal-name">{{ animal_name }}</h3>
+                   <!-- 隨機語錄 - 深紅色 -->
+                   <p class="quote">{{ random_quote }}</p>
+                    <!-- 新增 LOGO -->
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" 
+                 alt="潛意識無限學院" 
+                 class="logo-image">
                 </div>
+            </div>
+            <div class="share-buttons">
+                <button onclick="downloadCard()" class="btn btn-share">
+                    <i class="fas fa-download"></i> 下載圖卡
+                </button>
+                <button onclick="shareCard()" class="btn btn-share">
+                    <i class="fas fa-share-alt"></i> 分享到社群
+                </button>
             </div>
         </div>
 
-        <!-- 分享按鈕 -->
-        <div class="share-buttons">
-            <a href="#" id="fb-share" class="btn btn-facebook" onclick="shareOnFacebook()">
-                <i class="fab fa-facebook-f"></i> 分享到 Facebook
-            </a>
-            <a href="#" id="line-share" class="btn btn-line" onclick="shareOnLine()">
-                <i class="fab fa-line"></i> 分享到 LINE
-            </a>
-            <a href="https://www.facebook.com/subconscious.oo" 
-               class="btn btn-institute" 
-               target="_blank" 
-               rel="noopener noreferrer">
-                <i class="fas fa-link"></i> 前往潛意識無限學院
-            </a>
+    </div>
+</div>
+
+<!-- 大K老師對話框 -->
+<div class="teacher-result-section">
+    <div class="teacher-result-container">
+        <img src="{{ url_for('static', filename='images/teacher_k.png') }}" alt="大K老師" class="teacher-result-img">
+        <div class="teacher-result-text">
+            <p class="result-text">{{ teacher_dialogue }}</p>
+            <p class="teacher-name">—— 大K老師</p>
         </div>
-    
-    <script>
-       document.addEventListener('DOMContentLoaded', () => {
-    // 播放中獎音效
-    const audio = document.getElementById('win-sound');
-    if (audio) {
-        audio.volume = 0.6; // 調整音量
-    }
+    </div>
+</div>
 
-    // 在圖片加載完成後播放
-    const animalImage = document.querySelector('.animal-image');
-    if (animalImage) {
-        animalImage.addEventListener('load', () => {
-            setTimeout(() => {
-                if (audio) {
-                    audio.play().catch(error => {
-                        console.log('音效自動播放被阻止，需要用戶交互');
-                    });
-                }
+<!-- 重新測驗按鈕 -->
+<a href="/" class="btn btn-secondary">重新測驗</a>
 
-                // 顯示大K老師對話框
-                const teacherSection = document.getElementById('teacher-section');
-                if (teacherSection) {
-                    setTimeout(() => {
-                        teacherSection.style.display = 'block';
-                        teacherSection.style.opacity = '1';
-                    }, 1000); // 1秒後顯示
-                }
-            }, 500); // 延遲半秒配合動畫
+<!-- 新增音效 -->
+<audio id="win-sound" src="{{ url_for('static', filename='sounds/win.mp3') }}"></audio>
+
+<!-- 引入 html2canvas 用於下載圖卡 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    // 下載圖卡功能
+    function downloadCard() {
+        const card = document.querySelector('.share-card');
+        html2canvas(card).then(canvas => {
+            const link = document.createElement('a');
+            link.download = '金錢動物原型圖卡.png';
+            link.href = canvas.toDataURL();
+            link.click();
         });
     }
 
-    // 按鈕互動
-    const btn = document.querySelector('.btn-secondary');
-    if (btn) {
-        btn.addEventListener('click', () => {
-            // 添加頁面轉場效果
-            document.body.style.opacity = 0;
-            setTimeout(() => {
-                window.location.href = '/';
-            }, 300);
+    // 分享到社群功能
+    function shareCard() {
+        const card = document.querySelector('.share-card');
+        html2canvas(card).then(canvas => {
+            canvas.toBlob(blob => {
+                const file = new File([blob], '金錢動物原型圖卡.png', { type: 'image/png' });
+                const shareData = {
+                    files: [file],
+                    title: '我的金錢動物原型',
+                    text: '快來看看你的金錢動物原型是什麼！',
+                };
+                if (navigator.canShare && navigator.canShare(shareData)) {
+                    navigator.share(shareData);
+                } else {
+                    alert('您的瀏覽器不支援分享功能，請使用其他方式分享。');
+                }
+            });
         });
     }
-// Facebook 分享功能
-        function shareOnFacebook() {
-            const shareUrl = encodeURIComponent(window.location.href);
-            const shareText = encodeURIComponent("{{ share_text }}");
-            const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}&quote=${shareText}`;
-            window.open(facebookShareUrl, '_blank');
-        }
-
-        // LINE 分享功能
-        function shareOnLine() {
-            const shareUrl = encodeURIComponent(window.location.href);
-            const lineShareUrl = `https://social-plugins.line.me/lineit/share?url=${shareUrl}`;
-            window.open(lineShareUrl, '_blank');
-        }
-   
-    // 鎖定結果頁
-    history.pushState(null, null, document.URL);
-    window.addEventListener('popstate', () => {
-        history.pushState(null, null, document.URL);
-        window.location.href = '/';
-    });
-
-    // 離開頁面提示
-    window.onbeforeunload = function() {
-        return '測驗結果將會遺失，確定要離開嗎？';
-    };
-});
-   
-   
-        </script>
+</script>
 </body>
 </html>

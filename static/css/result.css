@@ -51,8 +51,6 @@
     opacity: 0;
 }
 
-
-
 @keyframes coinFlash {
     0%, 100% { opacity: 0; transform: scale(0); }
     50% { opacity: 1; transform: scale(1); }
@@ -122,22 +120,184 @@
     font-style: italic;
 }
 
+/* 分享圖卡 */
+.share-card {
+    background: rgba(255, 255, 255, 0.95); /* 白色背景 */
+    padding: 2rem;
+    border-radius: 15px;
+    border: 3px solid #8B5A2B; /* 木紋色邊框 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin: 2rem auto;
+    max-width: 400px;
+    text-align: center;
+}
 
-@media (max-width: 768px) {
+.card-content {
+    margin-bottom: 1.5rem;
+}
+
+.animal-image-share {
+    width: 100px;
+    height: auto;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-content h3 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.5rem;
+    color: #4CAF50; /* 森林綠色 */
+    margin-bottom: 1rem;
+}
+
+.card-content .quote {
+    font-size: 1.2rem;
+    color: #8B0000; /* 深紅色 */
+    font-style: italic;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.logo-container {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.logo-image {
+    width: 120px;
+    height: auto;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-share {
+    background: linear-gradient(135deg, #8B5A2B, #4CAF50); /* 木紋色到森林綠色 */
+    color: white;
+    padding: 12px 20px;
+    font-size: clamp(0.9rem, 3vw, 1rem);
+    border: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-share:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn-share i {
+    font-size: 1.2rem;
+}
+
+/* 電腦版樣式（預設樣式） */
+@media (min-width: 769px) {
     .animal-container {
-        padding: 1rem; /* 調整內邊距 */
+        padding: 2rem; /* 較大的內邊距 */
     }
 
     .animal-image {
-        width: 80%; /* 調整圖片大小 */
+        width: 300px; /* 較大的圖片 */
+    }
+
+    .animal-image-share {
+        width: 150px; /* 較大的圖片 */
     }
 
     .animal-title {
-        font-size: 2rem; /* 調整標題大小 */
+        font-size: 3rem; /* 較大的字體 */
+    }
+
+    .share-card {
+        max-width: 400px; /* 固定寬度 */
+        padding: 2rem; /* 較大的內邊距 */
+    }
+
+    .card-content {
+        padding: 1.5rem; /* 較大的內邊距 */
+    }
+
+    .card-content h3 {
+        font-size: 1.5rem; /* 較大的字體 */
+    }
+
+    .card-content .quote {
+        font-size: 1.2rem; /* 較大的字體 */
+    }
+
+    .logo-image {
+        width: 120px; /* 較大的 LOGO */
+    }
+
+    .btn-share {
+        font-size: 1rem; /* 較大的字體 */
+        padding: 12px 20px; /* 較大的按鈕 */
+    }
+
+    .teacher-section {
+        display: block; /* 顯示老師對話框 */
     }
 }
-/* 響應式調整 */
+
+/* 手機版樣式 */
 @media (max-width: 768px) {
+    .animal-container {
+        padding: 1rem; /* 較小的內邊距 */
+    }
+
+    .animal-image {
+        width: 80%; /* 較小的圖片 */
+    }
+
+    .animal-image-share {
+        width: 60px; /* 較小的圖片 */
+    }
+
+    .animal-title {
+        font-size: 2rem; /* 較小的字體 */
+    }
+
+    .share-card {
+        max-width: 90%; /* 較窄的寬度 */
+        padding: 1rem; /* 較小的內邊距 */
+    }
+
+    .card-content {
+        padding: 1rem; /* 較小的內邊距 */
+    }
+
+    .card-content h3 {
+        font-size: 1.2rem; /* 較小的字體 */
+    }
+
+    .card-content .quote {
+        font-size: 0.9rem; /* 較小的字體 */
+    }
+
+    .logo-image {
+        width: 60px; /* 較小的 LOGO */
+    }
+
+    .btn-share {
+        font-size: 0.8rem; /* 較小的字體 */
+        padding: 8px 12px; /* 較小的按鈕 */
+    }
+
+    .teacher-section {
+        display: none; /* 隱藏老師對話框 */
+    }
+
     .teacher-result-container {
         flex-direction: column;
         text-align: center;
