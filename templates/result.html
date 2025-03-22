@@ -742,10 +742,9 @@
 <!-- 新增音效 -->
 <audio id="win-sound" src="{{ url_for('static', filename='sounds/win.mp3') }}"></audio>
 
-<!-- 引入 html2canvas 用於下載圖卡 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-    // 下載圖卡功能
+    // 下載圖卡功能（保持不變）
     function downloadCard() {
         const card = document.querySelector('.share-card');
         html2canvas(card).then(canvas => {
@@ -756,35 +755,37 @@
         });
     }
 
+    // 分享到社群功能（改進版）
     function shareCard() {
-    const card = document.querySelector('.share-card');
-    html2canvas(card).then(canvas => {
-        canvas.toBlob(blob => {
-            const file = new File([blob], '金錢動物原型圖卡.png', { type: 'image/png' });
-
-            // 先嘗試包含圖片
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                navigator.share({
+        const card = document.querySelector('.share-card');
+        html2canvas(card).then(canvas => {
+            canvas.toBlob(blob => {
+                const file = new File([blob], '金錢動物原型圖卡.png', { type: 'image/png' });
+                const shareData = {
                     files: [file],
                     title: '我的金錢動物原型',
-                    text: '快來看看你的金錢動物原型是什麼！'
-                }).catch(error => console.log('分享失敗:', error));
-            } 
-            // 若圖片分享不支援，則只分享文字
-            else if (navigator.canShare && navigator.canShare({ text: '快來看看你的金錢動物原型是什麼！' })) {
-                navigator.share({
-                    title: '我的金錢動物原型',
-                    text: '快來看看你的金錢動物原型是什麼！'
-                }).catch(error => console.log('分享失敗:', error));
-            } 
-            // 如果兩種方式都不支援，提示用戶
-            else {
-                alert('您的瀏覽器不支援分享功能，請使用其他方式分享。');
-            }
-        });
-    });
-}
+                    text: '快來看看你的金錢動物原型是什麼！',
+                };
 
+                // 檢查瀏覽器是否支援分享功能
+                if (navigator.canShare && navigator.canShare(shareData)) {
+                    navigator.share(shareData)
+                        .then(() => {
+                            console.log('分享成功！');
+                        })
+                        .catch((error) => {
+                            console.error('分享失敗:', error);
+                            alert('分享失敗，請嘗試其他方式分享。');
+                        });
+                } else {
+                    // 如果不支援分享功能，改用下載圖卡
+                    alert('您的瀏覽器不支援分享功能，已改為下載圖卡。');
+                    downloadCard(); // 直接呼叫下載功能
+                }
+            });
+        }).catch((error) => {
+            console.error('生成圖卡失敗:', error);
+            alert('生成圖卡失敗，請稍後再試。');
+        });
+    }
 </script>
-</body>
-</html>
