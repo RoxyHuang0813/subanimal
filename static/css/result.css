@@ -12,7 +12,7 @@
 /* 動物類型區塊 */
 .animal-container {
     background: rgba(255, 255, 255, 0.95); /* 白色背景 */
-    padding: 2rem; /* 較大的內邊距 */
+    padding: clamp(1rem, 5vw, 2rem); /* 動態調整內邊距 */
     border-radius: 15px;
     border: 3px solid #8B5A2B; /* 木紋色邊框 */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -22,7 +22,7 @@
 
 /* 動物圖片 */
 .animal-image {
-    width: 300px; /* 較大的圖片 */
+    width: clamp(200px, 80vw, 300px); /* 動態調整圖片大小 */
     height: auto;
     margin: 1rem auto; /* 調整間距 */
     border-radius: 15px;
@@ -36,7 +36,7 @@
 
 .animal-title {
     font-family: 'Rubik', sans-serif;
-    font-size: 3rem; /* 較大的字體 */
+    font-size: clamp(2rem, 6vw, 3rem); /* 動態調整字體大小 */
     color: #FFD700; /* 金色 */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -70,7 +70,7 @@
     justify-content: center;
     gap: 1.5rem;
     background: rgba(255, 255, 255, 0.95); /* 白色背景 */
-    padding: 1.5rem;
+    padding: clamp(1rem, 5vw, 1.5rem); /* 動態調整內邊距 */
     border-radius: 15px;
     border: 3px solid #8B5A2B; /* 木紋色邊框 */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -92,7 +92,7 @@
 
 /* 大K老師圖片 */
 .teacher-result-img {
-    width: 100px;
+    width: clamp(80px, 20vw, 100px); /* 動態調整圖片大小 */
     height: auto;
     border-radius: 50%;
     border: 3px solid #FFD700; /* 金色邊框 */
@@ -106,7 +106,7 @@
 }
 
 .result-text {
-    font-size: clamp(1rem, 4vw, 1.2rem);
+    font-size: clamp(1rem, 4vw, 1.2rem); /* 動態調整字體大小 */
     line-height: 1.6;
     color: #444;
     margin: 0;
@@ -132,7 +132,7 @@
 /* 分享圖卡 */
 .share-card {
     background: rgba(255, 255, 255, 0.95); /* 白色背景 */
-    padding: 2rem;
+    padding: clamp(1rem, 5vw, 2rem); /* 動態調整內邊距 */
     border-radius: 15px;
     border: 3px solid #8B5A2B; /* 木紋色邊框 */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -146,7 +146,7 @@
 }
 
 .animal-image-share {
-    width: 100px;
+    width: clamp(80px, 20vw, 100px); /* 動態調整圖片大小 */
     height: auto;
     margin-bottom: 1rem;
     border-radius: 15px;
@@ -155,13 +155,13 @@
 
 .card-content h3 {
     font-family: 'Rubik', sans-serif;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 4vw, 1.5rem); /* 動態調整字體大小 */
     color: #4CAF50; /* 森林綠色 */
     margin-bottom: 1rem;
 }
 
 .card-content .quote {
-    font-size: 1.2rem;
+    font-size: clamp(0.9rem, 3vw, 1.2rem); /* 動態調整字體大小 */
     color: #8B0000; /* 深紅色 */
     font-style: italic;
     margin-bottom: 1rem;
@@ -174,7 +174,7 @@
 }
 
 .logo-image {
-    width: 120px;
+    width: clamp(80px, 20vw, 120px); /* 動態調整 LOGO 大小 */
     height: auto;
     opacity: 0.9;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
@@ -190,8 +190,8 @@
 .btn-share {
     background: linear-gradient(135deg, #8B5A2B, #4CAF50); /* 木紋色到森林綠色 */
     color: white;
-    padding: 12px 20px;
-    font-size: clamp(0.9rem, 3vw, 1rem);
+    padding: clamp(8px, 3vw, 12px) clamp(12px, 5vw, 20px); /* 動態調整按鈕大小 */
+    font-size: clamp(0.8rem, 3vw, 1rem); /* 動態調整字體大小 */
     border: none;
     border-radius: 30px;
     transition: all 0.3s ease;
