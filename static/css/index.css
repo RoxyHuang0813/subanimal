@@ -125,6 +125,53 @@ body {
   animation: float 3s ease-in-out infinite;
 }
 
+/* 大K老師的圖像容器 */
+.character {
+  position: relative; /* 相對定位 */
+  display: inline-block; /* 讓容器根據內容調整大小 */
+  margin: 20px 0; /* 上下留白 */
+}
+
+/* 箭頭和文字的容器 */
+.arrow-container {
+  position: absolute; /* 絕對定位 */
+  left: -120px; /* 調整箭頭位置（位於大K老師圖像的左側） */
+  top: 50%; /* 垂直居中 */
+  transform: translateY(-50%); /* 垂直居中 */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 箭頭和文字的間距 */
+}
+
+/* 箭頭樣式 */
+.arrow {
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent; /* 箭頭上半部分 */
+  border-bottom: 15px solid transparent; /* 箭頭下半部分 */
+  border-left: 30px solid #FFD700; /* 箭頭顏色（金色），尖點朝右 */
+}
+
+/* 文字樣式 */
+.arrow-text {
+  font-size: 1.2rem; /* 字體大小 */
+  color: #FFD700; /* 文字顏色（金色） */
+  font-weight: bold; /* 加粗 */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 文字陰影 */
+}
+
+@media (max-width: 768px) {
+  .arrow-container {
+      left: -80px; /* 在小螢幕上調整箭頭位置 */
+  }
+
+  .arrow-text {
+      font-size: 1rem; /* 在小螢幕上調整文字大小 */
+  }
+}
+
+
+
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -367,31 +414,20 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  max-height: 300px; /* 限制容器高度 */
+  overflow: hidden; /* 隱藏超出部分 */
 }
+
 /* 大K老師的照片 */
 .teacher-large-img {
-  width: 100%; /* 讓圖片寬度適應容器 */
-  max-width: 300px; /* 限制最大寬度，避免圖片過大 */
-  height: auto; /* 高度自動調整，保持圖片比例 */
-  border-radius: 15px; /* 圓角效果 */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* 陰影效果 */
-  object-fit: contain; /* 確保圖片完整顯示，不會被裁剪 */
+  width: auto; /* 讓寬度根據高度自動調整 */
+  max-width: 100%; /* 限制最大寬度，避免超出容器 */
+  height: 400px; /* 高度自動調整，保持圖片比例 */
+  max-height: 500px; /* 限制照片最大高度 */
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* 手機版樣式調整 */
-@media (max-width: 768px) {
-  .teacher-large-img {
-      max-width: 100px; /* 在手機上縮小圖片 */
-      margin-top: 20px; /* 增加上方間距，避免被切頭 */
-  }
-
-  .teacher-image-container {
-      display: flex;
-      justify-content: center; /* 讓圖片置中 */
-      align-items: center; /* 確保圖片垂直置中 */
-      padding: 10px; /* 增加內邊距 */
-  }
-}
 /* 對話框 */
 .intro-dialogue-box {
   background: #f9f7e8; /* 淺黃色背景 */
@@ -399,21 +435,34 @@ body {
   border-radius: 10px;
   border: 2px solid #8b5a2b; /* 邊框 */
   margin-bottom: 20px;
-  text-align: center; /* 文字置中 */
+  text-align: left; /* 文字靠左 */
+  font-family: 'Noto Sans TC', sans-serif; /* 統一字體 */
+  font-size: 1.1rem; /* 統一基礎字體大小 */
+  line-height: 1.2; /* 統一行高 */
+  color: #333; /* 統一文字顏色 */
 }
 
 .intro-dialogue-box h2 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 10px;
-  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 1.8rem; /* 標題字體大小 */
+  color: #333; /* 標題顏色 */
+  text-align: center; /* 文字置中 */
+  font-weight: bold; /* 加粗 */
+  margin-bottom: 1rem; /* 標題與內容的間距 */
 }
 
 .intro-dialogue-box p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 1rem; /* 字體大小 */
+  color: #555; /* 文字顏色 */
+  margin-bottom: 1.2rem; /* 段落間距 */
+}
+
+.intro-dialogue-box strong {
+  font-weight: bold; /* 加粗文字 */
+}
+
+.intro-dialogue-box .highlight {
+  color: #07158d; /* 高亮文字顏色 */
+  font-weight: bold; /* 高亮文字加粗 */
 }
 
 /* 上一頁按鈕 */
@@ -434,6 +483,20 @@ body {
   transform: scale(1.05); /* 懸停時放大 */
 }
 
+/* 讓大K老師圖像的游標變成手的形狀 */
+.character-img {
+  width: 200px;
+  height: auto;
+  animation: float 3s ease-in-out infinite;
+  cursor: pointer; /* 游標變成手的形狀 */
+}
+
+/* 浮動動畫 */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
 /* 手機版樣式調整 */
 @media (max-width: 768px) {
   .teacher-intro-content {
@@ -442,7 +505,15 @@ body {
   }
 
   .teacher-large-img {
-      width: 200px; /* 縮小照片 */
+      max-width: 100px; /* 在手機上縮小圖片 */
+      margin-top: 30px; /* 增加上方間距，避免被切頭 */
+  }
+
+  .teacher-image-container {
+      display: flex;
+      justify-content: center; /* 讓圖片置中 */
+      align-items: center; /* 確保圖片垂直置中 */
+      padding: 10px; /* 增加內邊距 */
   }
 
   .intro-dialogue-box {
@@ -461,18 +532,7 @@ body {
       padding: 8px 16px; /* 縮小按鈕 */
       font-size: 14px; /* 縮小按鈕字體 */
   }
-}
-/* 讓大K老師圖像的游標變成手的形狀 */
-.character-img {
-  width: 200px;
-  height: auto;
-  animation: float 3s ease-in-out infinite;
-  cursor: pointer; /* 游標變成手的形狀 */
-}
 
-
-/* 響應式設計 */
-@media (max-width: 768px) {
   .dialogue-box {
       width: 90%; /* 在小螢幕上佔滿更多空間 */
       padding: 15px; /* 調整內邊距 */

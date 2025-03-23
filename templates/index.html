@@ -58,25 +58,36 @@
         </video>
     </div>
 
-    <!-- 主內容區 -->
-<div id="main-section" class="main-container">
-  <img src="{{ url_for('static', filename='images/logo.png') }}" 
-       alt="LOGO" 
-       class="logo"
-       onload="console.log('LOGO loaded')"
-       onerror="console.error('LOGO load failed')">
-  <div class="character">
-      <img src="{{ url_for('static', filename='images/teacher_k.png') }}" 
-           alt="大K老師" 
-           class="character-img">
+    <div id="main-section" class="main-container">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" 
+           alt="LOGO" 
+           class="logo"
+           onload="console.log('LOGO loaded')"
+           onerror="console.error('LOGO load failed')">
+  
+      <!-- 大K老師的 Q 版圖像及箭頭 -->
+      <div class="character">
+          <!-- 金色箭頭和文字 -->
+          <div class="arrow-container">
+              <div class="arrow"></div>
+              <span class="arrow-text">解鎖大K</span>
+          </div>
+          <!-- 大K老師的 Q 版圖像 -->
+          <img src="{{ url_for('static', filename='images/teacher_k.png') }}" 
+               alt="大K老師" 
+               class="character-img">
+      </div>
+  
+      <!-- 對話框 -->
+      <div class="dialogue-box">
+          <p class="dialogue-text"></p>
+      </div>
+  
+      <!-- 開始測驗按鈕 -->
+      <div id="quiz-section" class="quiz-container">
+          <a href="/test" class="start-btn">開始測驗</a>
+      </div>
   </div>
-  <div class="dialogue-box">
-      <p class="dialogue-text"></p>
-  </div>
-  <div id="quiz-section" class="quiz-container">
-      <a href="/test" class="start-btn">開始測驗</a>
-  </div>
-</div>
 
  <!-- 大K老師的介紹區塊 -->
  <div id="teacher-intro-section" class="teacher-intro-section" style="display: none;">
@@ -88,15 +99,28 @@
              class="teacher-large-img">
     </div>
       
-     <!-- 對話框 -->
-     <div class="intro-dialogue-box">
-      <h2>大K老師</h2>
-      <p><strong>大K老師</strong>，潛意識無限學院創辦人</p>曾是銀行高管，因錯誤決策負債千萬。</p>
-      <p>透過催眠療癒，他成功解開內心困境，實現人生翻盤。</p>
-      <p>如今，他專注幫助人們透過潛意識療癒</p>改變金錢、關係、人生困境，</p>讓學員發現深藏的內在信念並重寫人生腳本。</p>
-      <p>想改變，來<span class="highlight">潛意識無限學院</span>，讓<strong>大K老師帶你突破限制！</strong></p>
+    <div class="intro-dialogue-box">
+      <!-- 資歷內容 -->
+      <div class="qualifications">
+          <h2>大K老師</h2>
+          <p>潛意識無限學院 院長</p>
+          <p>佛光大學管理系 碩士研究生</p>
+          <p>IAHH國際專業催眠療癒師聯合總會 理事長</p>
+          <p>美國ACHE催眠醫師考試局 培訓講師</p>
+          <p>美國ACHE催眠療癒師</p>
+          <p>英國專業催眠及心理治療協會APHP臨床催眠師</p>
+          <p>香港催眠醫師及心理治療師公會臨床催眠師[HKOHP]</p>
+          <p>美國NGH催眠培訓講師</p>
+          <p>美國NGH催眠師</p>
+          <p>板橋/樹林社區大學催眠講師</p>
+          <p>救國團北區催眠講師</p>
+          <p>著作：催眠新手療癒村－時報出版</p>
+      </div>
+  
+      <!-- 原有內容 -->
+           <p><strong>大K老師</strong>，潛意識無限學院創辦人，曾是銀行高管，因錯誤決策負債千萬。透過催眠療癒，他成功解開內心困境，實現人生翻盤。如今，他專注幫助人們透過潛意識療癒，改變金錢、關係、人生困境。讓學員發現深藏的內在信念並重寫人生腳本。
+      <p>想改變，來<span class="highlight">潛意識無限學院</span，讓<strong>大K老師帶你突破限制！</strong></p>
   </div>
-      
       <!-- 上一頁按鈕 -->
       <button id="back-to-index-btn" class="back-btn">上一頁</button>
   </div>

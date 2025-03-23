@@ -168,10 +168,13 @@
 }
 
 .qr-code-image {
-    width: clamp(100px, 25vw, 150px); /* 動態調整 QR CODE 大小 */
-    height: auto;
+    width: clamp(250px, 30vw, 300px); /* 最小 250px，動態調整 */
+    height: clamp(250px, 30vw, 300px); /* 最小 250px，動態調整 */
     border-radius: 10px; /* 圓角效果 */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 陰影效果 */
+    object-fit: contain; /* 確保圖片比例正確 */
+    padding: 10px; /* 增加內邊距 */
+    background: white; /* 白色背景 */
 }
 
 /* QR CODE 下方文字 */
@@ -181,7 +184,6 @@
     margin-top: 0.5rem; /* 與 QR CODE 圖片的間距 */
     font-weight: 500; /* 字體粗細 */
 }
-
 
 /* 圖卡內容 */
 .card-content {

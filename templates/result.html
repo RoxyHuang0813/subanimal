@@ -158,14 +158,18 @@
         }
 
         .logo-hint {
-            font-size: 1rem;
-            color: var(--accent-color); /* 金色 */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 增加陰影讓文字更清晰 */
-            margin-top: 0.5rem;
-            text-align: center;
-            opacity: 0.9;
-            transition: opacity 0.3s ease;
-        }
+    font-size: 1.5rem;
+    color: #FFD700; /* 金色 */
+    text-shadow: 
+        -1px -1px 0 #000, /* 左上黑邊 */
+        1px -1px 0 #000,  /* 右上黑邊 */
+        -1px 1px 0 #000,  /* 左下黑邊 */
+        1px 1px 0 #000;   /* 右下黑邊 */
+    margin-top: 0.5rem;
+    text-align: center;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
         .logo-link:hover .logo-hint {
             opacity: 1;
         }
@@ -663,8 +667,7 @@
    <a href="https://www.facebook.com/subconscious.oo" class="logo-link" target="_blank" rel="noopener noreferrer">
     <img src="{{ url_for('static', filename='images/logo.png') }}" alt="潛意識無限學院" class="logo">
     <div class="logo-hint">
-        <p>你對金錢的選擇，其實是潛意識在說話</p>
-        <p>點擊 LOGO，發現如何改變財務命運！</p>
+        <p>點擊 LOGO，解鎖你的潛意識金錢密碼！</p>
     </div>
 </a>
 
