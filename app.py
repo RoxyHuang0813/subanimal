@@ -311,7 +311,7 @@ QUESTIONS = [
         'question': '選擇理財商品時，你最重視？',
         'options': [
             {'text': '風險越低越好，定存最好', 'type': 'squirrel'},
-            {'text': '高風險高回報,賭賭看', 'type': 'cheetah'},
+            {'text': '高風險高回報，賭賭看', 'type': 'cheetah'},
             {'text': '朋友推薦跟著買', 'type': 'raccoon'},
             {'text': '先等我好好分析完再決定', 'type': 'owl'},
             {'text': '要能随時變現，儲蓄險不買', 'type': 'wolf'},

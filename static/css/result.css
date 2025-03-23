@@ -169,7 +169,7 @@
 
 /* QR CODE 圖片 */
 .qr-code-image {
-    width: (150px, 40vw, 150px); /* 動態調整 QR CODE 大小 */
+    width: (150px, 240vw, 150px); /* 動態調整 QR CODE 大小 */
     height: auto; /* 高度自動調整 */
     border-radius: 10px; /* 圓角效果 */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 陰影效果 */
