@@ -512,4 +512,30 @@ body {
       padding: 10px; /* 增加內邊距 */
   }
 
-  
+  .intro-dialogue-box {
+      padding: 15px; /* 減少內邊距 */
+  }
+
+  .intro-dialogue-box h2 {
+      font-size: 1.3rem; /* 縮小標題字體 */
+  }
+
+  .intro-dialogue-box p {
+      font-size: 0.9rem; /* 縮小正文字體 */
+  }
+
+  .back-btn {
+      padding: 8px 16px; /* 縮小按鈕 */
+      font-size: 14px; /* 縮小按鈕字體 */
+  }
+
+  .dialogue-box {
+      width: 90%; /* 在小螢幕上佔滿更多空間 */
+      padding: 15px; /* 調整內邊距 */
+  }
+
+  .dialogue-text {
+      font-size: 1rem; /* 調整字體大小 */
+      line-height: 1.5; /* 調整行高 */
+  }
+}
