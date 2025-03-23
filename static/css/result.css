@@ -167,23 +167,23 @@
     text-align: center;
 }
 
+/* QR CODE 圖片 */
 .qr-code-image {
-    width: clamp(250px, 30vw, 300px); /* 最小 250px，動態調整 */
-    height: clamp(250px, 30vw, 300px); /* 最小 250px，動態調整 */
+    width: (150px, 40vw, 150px); /* 動態調整 QR CODE 大小 */
+    height: auto; /* 高度自動調整 */
     border-radius: 10px; /* 圓角效果 */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 陰影效果 */
-    object-fit: contain; /* 確保圖片比例正確 */
     padding: 10px; /* 增加內邊距 */
-    background: white; /* 白色背景 */
 }
 
 /* QR CODE 下方文字 */
 .qr-code-text {
     font-size: clamp(0.9rem, 3vw, 1.2rem); /* 動態調整字體大小 */
-    color: #444; /* 文字顏色 */
+    color: #f3f0f0; /* 文字顏色 */
     margin-top: 0.5rem; /* 與 QR CODE 圖片的間距 */
     font-weight: 500; /* 字體粗細 */
 }
+
 
 /* 圖卡內容 */
 .card-content {
@@ -199,28 +199,6 @@
 }
 
 
-
-/* QR CODE 容器 */
-.qr-code-container {
-    margin-top: 1rem; /* 與上方 LOGO 的間距 */
-    text-align: center;
-}
-
-.qr-code-image {
-    width: clamp(100px, 25vw, 150px); /* 動態調整 QR CODE 大小 */
-    height: auto;
-    border-radius: 10px; /* 圓角效果 */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* 陰影效果 */
-}
-
-
-/* QR CODE 下方文字 */
-.qr-code-text {
-    font-size: clamp(0.9rem, 3vw, 1.2rem); /* 動態調整字體大小 */
-    color: #f3f0f0; /* 文字顏色 */
-    margin-top: 0.5rem; /* 與 QR CODE 圖片的間距 */
-    font-weight: 500; /* 字體粗細 */
-}
 
 
 /* 分享按鈕容器 */
