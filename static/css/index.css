@@ -438,7 +438,7 @@ body {
   text-align: left; /* 文字靠左 */
   font-family: 'Noto Sans TC', sans-serif; /* 統一字體 */
   font-size: 1.1rem; /* 統一基礎字體大小 */
-  line-height: 1.2; /* 統一行高 */
+  line-height: 1; /* 統一行高 */
   color: #333; /* 統一文字顏色 */
 }
 
@@ -461,7 +461,7 @@ body {
 }
 
 .intro-dialogue-box .highlight {
-  font-size: 2rem; /* 字體大小 */
+  font-size: 1.5rem; /* 字體大小 */
   color: #d78707; /* 高亮文字顏色 */
   font-weight: bold; /* 高亮文字加粗 */
 }
