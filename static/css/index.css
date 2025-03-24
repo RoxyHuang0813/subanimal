@@ -389,34 +389,45 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100%; /* 使用 min-height 替代 height */
-  background: rgba(0, 0, 0, 0.8); /* 半透明黑色背景 */
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  overflow-y: auto; /* 允許垂直滾動 */
-  padding: 20px; /* 增加內邊距 */
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box; /* 確保padding不影響總寬度 */
 }
 
 .teacher-intro-content {
   background: white;
-  padding: 30px; /* 增加內邊距 */
+  padding: 25px;
   border-radius: 15px;
-  text-align: center;
-  max-width: 600px; /* 增加最大寬度 */
   width: 90%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 陰影效果 */
-  margin: 20px 0; /* 增加上下邊距 */
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* 照片容器 */
-.teacher-image-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  max-height: 400px; /* 增加容器高度 */
-  overflow: hidden; /* 隱藏超出部分 */
+/* 新增響應式圖片容器 */
+.responsive-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* 控制圖片比例 (4:3) 根據您的圖片比例調整 */
+  margin: 0 auto 20px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #f5f5f5; /* 預備背景色 */
+}
+
+.responsive-teacher-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 關鍵屬性：保持比例完整顯示 */
+  object-position: center;
 }
 
 /* 大K老師的照片 */
@@ -500,44 +511,53 @@ body {
   50% { transform: translateY(-10px); }
 }
 
-/* 手機版樣式調整 */
 @media (max-width: 768px) {
   .teacher-intro-content {
-      padding: 15px; /* 減少內邊距 */
-      max-width: 90%; /* 讓內容更貼合螢幕 */
+    padding: 15px;
+    max-width: 95%; /* 增加一點寬度空間 */
+    margin: 10px auto; /* 確保居中 */
   }
 
   .teacher-image-container {
-      display: flex;
-      justify-content: center; /* 讓圖片置中 */
-      align-items: center; /* 確保圖片垂直置中 */
-      padding: 10px; /* 增加內邊距 */
+    max-height: 250px !important; /* 強制限制高度 */
+    width: 100%;
+    padding: 5px; /* 減少內邊距 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0 auto 15px; /* 增加下方間距 */
+  }
+
+  /* 手機專用樣式 */
+@media (max-width: 768px) {
+  .teacher-intro-content {
+    padding: 15px;
+    max-width: 95%;
+  }
+  
+  .responsive-image-wrapper {
+    padding-top: 100%; /* 手機上改用1:1比例 */
+    margin-bottom: 15px;
   }
 
   .intro-dialogue-box {
-      padding: 15px; /* 減少內邊距 */
+    padding: 12px;
   }
-
   .intro-dialogue-box h2 {
-      font-size: 1.3rem; /* 縮小標題字體 */
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
   }
 
   .intro-dialogue-box p {
-      font-size: 0.9rem; /* 縮小正文字體 */
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.4; /* 調整行高 */
   }
 
   .back-btn {
-      padding: 8px 16px; /* 縮小按鈕 */
-      font-size: 14px; /* 縮小按鈕字體 */
-  }
-
-  .dialogue-box {
-      width: 90%; /* 在小螢幕上佔滿更多空間 */
-      padding: 15px; /* 調整內邊距 */
-  }
-
-  .dialogue-text {
-      font-size: 1rem; /* 調整字體大小 */
-      line-height: 1.5; /* 調整行高 */
+    padding: 8px 16px;
+    font-size: 14px;
+    margin-top: 15px;
   }
 }

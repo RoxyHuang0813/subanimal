@@ -159,5 +159,20 @@ p {
         <button type="submit">提交</button>
     </form>
     <p class="progress-text">進度：{{ progress }} / {{ total }}</p>
+
+    <script>
+        // 監聽瀏覽器的返回事件（手機返回鍵）
+        window.addEventListener("popstate", function(event) {
+            // 讓「上一頁」按鈕的功能在手機返回鍵時也能生效
+            var backButton = document.getElementById("back-to-index-btn");
+            if (backButton) {
+                backButton.click();
+            }
+        });
+      
+        // 確保載入時新增一個狀態，讓返回鍵可用
+        window.history.pushState(null, null, document.URL);
+      </script>
+
 </body>
 </html>

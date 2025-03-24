@@ -93,14 +93,12 @@
 <div id="teacher-intro-section" class="teacher-intro-section" style="display: none;">
   <div class="teacher-intro-content">
     <div class="intro-dialogue-box">
-      <div class="qualifications"></div>
-      <!-- 資歷內容 -->
       <h2>大K老師</h2>
-      <!-- 大K老師的照片 -->
-      <div class="teacher-image-container">
+      <!-- 修改圖片容器結構 -->
+      <div class="responsive-image-wrapper">
         <img src="{{ url_for('static', filename='images/teacher_k_large.png') }}" 
              alt="大K老師" 
-             class="teacher-large-img">
+             class="responsive-teacher-image">
       </div>
       <p><strong>大K老師</strong></p>
       <p>潛意識無限學院 院長</p>
