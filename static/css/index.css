@@ -389,21 +389,22 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100%; /* 使用 min-height 替代 height */
   background: rgba(0, 0, 0, 0.8); /* 半透明黑色背景 */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   overflow-y: auto; /* 允許垂直滾動 */
+  padding: 20px; /* 增加內邊距 */
 }
 
 .teacher-intro-content {
   background: white;
-  padding: 20px;
+  padding: 30px; /* 增加內邊距 */
   border-radius: 15px;
   text-align: center;
-  max-width: 500px;
+  max-width: 600px; /* 增加最大寬度 */
   width: 90%;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 陰影效果 */
   margin: 20px 0; /* 增加上下邊距 */
@@ -414,7 +415,7 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-  max-height: 300px; /* 限制容器高度 */
+  max-height: 400px; /* 增加容器高度 */
   overflow: hidden; /* 隱藏超出部分 */
 }
 
@@ -422,23 +423,25 @@ body {
 .teacher-large-img {
   width: auto; /* 讓寬度根據高度自動調整 */
   max-width: 100%; /* 限制最大寬度，避免超出容器 */
-  height: 400px; /* 高度自動調整，保持圖片比例 */
-  max-height: 500px; /* 限制照片最大高度 */
+  height: auto; /* 高度自動調整，保持圖片比例 */
+  max-height: 400px; /* 限制照片最大高度 */
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  object-fit: contain; /* 確保圖片完整顯示 */
 }
 
 /* 對話框 */
 .intro-dialogue-box {
   background: #f9f7e8; /* 淺黃色背景 */
   padding: 20px;
+  padding-bottom: 5px;
   border-radius: 10px;
   border: 2px solid #8b5a2b; /* 邊框 */
   margin-bottom: 20px;
   text-align: left; /* 文字靠左 */
   font-family: 'Noto Sans TC', sans-serif; /* 統一字體 */
   font-size: 1.1rem; /* 統一基礎字體大小 */
-  line-height: 1; /* 統一行高 */
+  line-height: 0.5; /* 調整行高 */
   color: #333; /* 統一文字顏色 */
 }
 
@@ -483,7 +486,6 @@ body {
   background-color: #6b4421; /* 深色木紋 */
   transform: scale(1.05); /* 懸停時放大 */
 }
-
 /* 讓大K老師圖像的游標變成手的形狀 */
 .character-img {
   width: 200px;

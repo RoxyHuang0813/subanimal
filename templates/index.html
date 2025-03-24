@@ -115,10 +115,11 @@
       <p>板橋/樹林社區大學催眠講師</p>
       <p>救國團北區催眠講師</p>
       <p>著作：催眠新手療癒村－時報出版</p>
+      <p>創作牌卡：潛意識人生指引卡</p>
     </div>
 
     <!-- 原有內容 -->
-    <p><strong>大K老師</strong>，潛意識無限學院創辦人，曾是銀行高管，因錯誤決策負債千萬。透過催眠療癒，他成功解開內心困境，實現人生翻盤。如今，他專注幫助人們透過潛意識療癒，改變金錢、關係、人生困境。讓學員發現深藏的內在信念並重寫人生腳本。</p>
+    <p><strong>大K老師</strong>，潛意識無限學院創辦人，曾是銀行高管，因錯誤決策負債千萬。</p><p>透過催眠療癒，他成功解開內心限制，實現人生翻轉。現在他專注幫助人們</p><p>透過潛意識療癒，改變困境。讓學員改變深藏的內在信念，重啟新的人生。</p>
     <p>想改變，來<span class="highlight">潛意識無限學院！</span></p>
     <p><strong>讓大K老師帶你突破限制！</strong></p>
 
@@ -126,8 +127,24 @@
     <button id="back-to-index-btn" class="back-btn">上一頁</button>
   </div>
 </div>
-
 <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 <audio id="type-sound" src="{{ url_for('static', filename='sounds/type.wav') }}"></audio>
+
+
+<script>
+  // 監聽瀏覽器的返回事件（手機返回鍵）
+  window.addEventListener("popstate", function(event) {
+      // 讓「上一頁」按鈕的功能在手機返回鍵時也能生效
+      var backButton = document.getElementById("back-to-index-btn");
+      if (backButton) {
+          backButton.click();
+      }
+  });
+
+  // 確保載入時新增一個狀態，讓返回鍵可用
+  window.history.pushState(null, null, document.URL);
+</script>
+
+
 </body>
 </html>
