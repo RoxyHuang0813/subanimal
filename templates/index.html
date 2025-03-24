@@ -93,13 +93,10 @@
 <div id="teacher-intro-section" class="teacher-intro-section" style="display: none;">
   <div class="teacher-intro-content">
     <div class="intro-dialogue-box">
+      <div class="qualifications"></div>
+      <!-- 資歷內容 -->
       <h2>大K老師</h2>
-      <!-- 修改圖片容器結構 -->
-      <div class="responsive-image-wrapper">
-        <img src="{{ url_for('static', filename='images/teacher_k_large.png') }}" 
-             alt="大K老師" 
-             class="responsive-teacher-image">
-      </div>
+     
       <p><strong>大K老師</strong></p>
       <p>潛意識無限學院 院長</p>
       <p>佛光大學管理系 碩士研究生</p>
@@ -115,7 +112,12 @@
       <p>著作：催眠新手療癒村－時報出版</p>
       <p>創作牌卡：潛意識人生指引卡</p>
     </div>
-
+     <!-- 大K老師的照片 -->
+     <div class="teacher-image-container">
+      <img src="{{ url_for('static', filename='images/teacher_k_large.png') }}" 
+           alt="大K老師" 
+           class="teacher-large-img">
+    </div>
     <!-- 原有內容 -->
     <p><strong>大K老師</strong>，潛意識無限學院創辦人，曾是銀行高管，因錯誤決策負債千萬。</p><p>透過催眠療癒，他成功解開內心限制，實現人生翻轉。現在他專注幫助人們</p><p>透過潛意識療癒，改變困境。讓學員改變深藏的內在信念，重啟新的人生。</p>
     <p>想改變，來<span class="highlight">潛意識無限學院！</span></p>
@@ -142,6 +144,7 @@
   // 確保載入時新增一個狀態，讓返回鍵可用
   window.history.pushState(null, null, document.URL);
 </script>
+
 
 
 </body>
