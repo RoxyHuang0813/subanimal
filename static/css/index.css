@@ -441,7 +441,7 @@ body {
   text-align: left; /* 文字靠左 */
   font-family: 'Noto Sans TC', sans-serif; /* 統一字體 */
   font-size: 1.1rem; /* 統一基礎字體大小 */
-  line-height: 0.5; /* 調整行高 */
+  line-height: 1; /* 調整行高 */
   color: #333; /* 統一文字顏色 */
 }
 
