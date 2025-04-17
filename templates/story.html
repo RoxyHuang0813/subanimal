@@ -28,30 +28,31 @@
             width: 100%;
             max-width: 800px;
             border: 2px solid #8B5A2B;
-            min-height: 500px; /* 確保容器高度足夠 */
+            min-height: 500px;
+            position: relative;
         }
 
         .story-title {
             font-size: 2rem;
             font-weight: bold;
             color: #4CAF50;
-            text-align: center; /* 確保標題置中 */
+            text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px;
         }
 
         .story-content {
-    font-size: 1.1rem;
-    color: #555;
-    line-height: 1.8;
-    text-align: justify;
-    padding: 20px; /* 增加內邊距 */
-    overflow: visible; /* 確保內容不會被隱藏 */
-    white-space: pre-line; /* 保留換行符並顯示換行 */
-}
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            text-align: justify;
+            padding: 20px;
+            overflow: visible;
+            white-space: pre-line;
+        }
 
         .story-content p {
-            margin-bottom: 20px; /* 段落之間增加間距 */
+            margin-bottom: 20px;
         }
 
         .back-btn {
@@ -63,10 +64,10 @@
             border-radius: 25px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            margin: 20px auto 0; /* 水平置中 */
-            display: block; /* 讓按鈕成為塊級元素 */
+            margin: 10px auto 0;
+            display: block;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            width: fit-content; /* 讓按鈕寬度根據內容自適應 */
+            width: fit-content;
         }
 
         .back-btn:hover {
@@ -76,15 +77,207 @@
         .back-btn:focus {
             outline: none;
         }
+
+        /* 新增的放鬆按鈕樣式 */
+        .relax-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px auto 0;
+            display: block;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            width: fit-content;
+        }
+
+        .relax-btn:hover {
+            background-color: #3e8e41;
+        }
+
+        .relax-btn.playing {
+            background-color: #2196F3;
+        }
+
+        .relax-btn.paused {
+            background-color: #FFC107;
+            color: #333;
+        }
+
+        /* 音頻控制器的隱藏樣式 */
+        #relax-audio {
+            display: none;
+        }
+
+        /* 按鈕容器樣式 */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* 進度條樣式 */
+        .progress-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 10px auto;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+    
+     /* 在原有的 style 區塊中加入以下新樣式 */
+     .relax-subtitle {
+            color: #be0dbe86; /* 深棕色，與森林主題協調 */
+            font-size: 0.9rem;
+            text-align: center;
+            margin: 5px 0 15px 0;
+            font-weight: 500;
+            font-style: italic;
+            letter-spacing: 0.5px;
+            text-shadow: 0 1px 1px rgba(104, 99, 99, 0.7);
+            position: relative;
+            display: inline-block;
+            padding: 0 10px;
+        }
+        
+        .relax-subtitle::before,
+        .relax-subtitle::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 1px;
+            background: #c751ea; /* 森林綠 */
+        }
+        
+        .relax-subtitle::before {
+            left: -35px;
+        }
+        
+        .relax-subtitle::after {
+            right: -35px;
+        }
+    
+    
     </style>
 </head>
 <body>
+
+ 
     <div class="story-container">
         <h1 class="story-title">{{ animal_name }} 的故事</h1>
+        
+        <div class="button-container">
+            <!-- 放鬆聽按鈕 -->
+            <button id="relaxBtn" class="relax-btn">大K放鬆音頻，快來試</button>
+            
+            <!-- 新增的強調文字 -->
+            <div class="relax-subtitle">3分鐘呼吸，釋放壓力，恢復平靜！</div>
+            
+            <!-- 音頻播放器 -->
+            <audio id="relax-audio">
+                <source src="{{ url_for('static', filename='audio/relax_music.mp3') }}" type="audio/mpeg">
+                您的瀏覽器不支持音頻元素。
+            </audio>
+            
+            <!-- 進度條 -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar">
+                    <div class="progress" id="progressBar"></div>
+                </div>
+            </div>
+        
         <div class="story-content">
             {{ story_content }}
         </div>
-        <button class="back-btn" onclick="history.back()">回上一頁</button>
+              
+            <!-- 回上一頁按鈕 -->
+            <button class="back-btn" onclick="history.back()">回上一頁</button>
+        </div>
     </div>
+            
+          
+    <script>
+        // 放鬆聽按鈕功能
+        const relaxBtn = document.getElementById('relaxBtn');
+        const relaxAudio = document.getElementById('relax-audio');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+
+        
+        
+        // 初始化狀態
+        let isPlaying = false;
+        let isPaused = false;
+        
+        relaxBtn.addEventListener('click', function() {
+            if (relaxAudio.paused && !isPaused) {
+                // 第一次播放或重新播放
+                relaxAudio.play();
+                relaxBtn.textContent = '暫停';
+                relaxBtn.classList.add('playing');
+                progressContainer.style.display = 'block';
+                isPlaying = true;
+                isPaused = false;
+            } else if (isPlaying && !relaxAudio.paused) {
+                // 暫停播放
+                relaxAudio.pause();
+                relaxBtn.textContent = '繼續播放';
+                relaxBtn.classList.remove('playing');
+                relaxBtn.classList.add('paused');
+                isPlaying = false;
+                isPaused = true;
+            } else if (isPaused && relaxAudio.paused) {
+                // 繼續播放
+                relaxAudio.play();
+                relaxBtn.textContent = '暫停';
+                relaxBtn.classList.remove('paused');
+                relaxBtn.classList.add('playing');
+                isPlaying = true;
+                isPaused = false;
+            }
+        });
+        
+        // 更新進度條
+        relaxAudio.addEventListener('timeupdate', function() {
+            const progress = (relaxAudio.currentTime / relaxAudio.duration) * 100;
+            progressBar.style.width = progress + '%';
+        });
+        
+        // 音頻結束時重置按鈕
+        relaxAudio.addEventListener('ended', function() {
+            relaxBtn.textContent = '放鬆聽';
+            relaxBtn.classList.remove('playing');
+            relaxBtn.classList.remove('paused');
+            progressContainer.style.display = 'none';
+            progressBar.style.width = '0%';
+            isPlaying = false;
+            isPaused = false;
+        });
+        
+        // 點擊進度條跳轉播放位置
+        progressBar.addEventListener('click', function(e) {
+            const percent = e.offsetX / this.offsetWidth;
+            relaxAudio.currentTime = percent * relaxAudio.duration;
+        });
+    </script>
 </body>
 </html>

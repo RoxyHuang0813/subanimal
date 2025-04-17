@@ -1,173 +1,193 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 初始化元素引用
     const loader = document.getElementById('loader');
     const forestAnimation = document.getElementById('forest-animation');
     const mainSection = document.getElementById('main-section');
     const forestVideo = document.getElementById('forest-video');
     const skipBtn = document.querySelector('.skip-animation');
-    let typeWriterTimeout = null; // 用於儲存打字機效果的 setTimeout ID
+    const dialogueText = document.querySelector('.dialogue-text');
+    const quizSection = document.getElementById('quiz-section');
+    const teacherK = document.querySelector('.character-img');
+    const teacherIntroSection = document.getElementById('teacher-intro-section');
+    const backToIndexBtn = document.getElementById('back-to-index-btn');
+    const bgMusic = document.getElementById('bg-music');
+    const audioPrompt = document.getElementById('audio-prompt');
+    const typeSound = document.getElementById('type-sound');
+
+    // 狀態變量
+    let typeWriterTimeout = null;
+    let isTyping = false;
 
     // 初始化頁面
-    setTimeout(() => loader.style.display = 'none', 1000); // 隱藏載入動畫
+    setTimeout(() => {
+        loader.style.display = 'none';
+        initVideo();
+    }, 1000);
 
-    // 影片事件處理
-    forestVideo.addEventListener('loadeddata', () => {
-        forestVideo.play().catch(() => handleAnimationEnd());
-    });
+    // 初始化影片
+    function initVideo() {
+        if (!forestVideo) return;
 
-    forestVideo.addEventListener('ended', handleAnimationEnd);
-    forestVideo.addEventListener('error', handleAnimationEnd);
+        // 確保影片靜音以符合瀏覽器自動播放政策
+        forestVideo.muted = true;
+        
+        forestVideo.addEventListener('loadeddata', () => {
+            forestVideo.play().catch(handleVideoError);
+        });
+        
+        forestVideo.addEventListener('ended', handleAnimationEnd);
+        forestVideo.addEventListener('error', handleVideoError);
+        
+        if (skipBtn) {
+            skipBtn.addEventListener('click', handleAnimationEnd);
+        }
+    }
 
-    // 跳過按鈕
-    skipBtn.addEventListener('click', handleAnimationEnd);
+    function handleVideoError(error) {
+        console.error('影片處理錯誤:', error);
+        handleAnimationEnd();
+    }
 
     function handleAnimationEnd() {
+        if (!forestAnimation || !mainSection) return;
+
         forestAnimation.style.opacity = '0';
         setTimeout(() => {
             forestAnimation.style.display = 'none';
             mainSection.style.display = 'flex';
             void mainSection.offsetHeight; // 強制重繪
             mainSection.classList.add('active');
-            startDialogue();
+            
+            // 只有當不在介紹頁面時才啟動對話
+            if (!teacherIntroSection || teacherIntroSection.style.display !== 'flex') {
+                startDialogue();
+            }
         }, 800);
     }
 
-    // 重新測驗按鈕
-    const startBtn = document.querySelector('.start-btn');
-    if (startBtn) {
-        startBtn.addEventListener('click', () => {
-            // 重置頁面狀態
-            resetPage();
-            // 清除所有動態內容
-            clearDynamicContent();
-            // 重定向到測驗頁面
-            window.location.href = '/test';
+    // 打字機效果（優化版）
+    function startDialogue() {
+        if (!dialogueText || isTyping) return;
+
+        const textLines = [
+            "歡迎來到潛意識財富森林！",
+            "我是潛意識無限學院的院長",
+            "～大K老師～",
+            "準備好探索你的金錢動物了嗎？"
+        ];
+
+        dialogueText.textContent = '';
+        isTyping = true;
+        let lineIndex = 0;
+        let charIndex = 0;
+
+        const typeWriter = () => {
+            if (lineIndex < textLines.length) {
+                if (charIndex < textLines[lineIndex].length) {
+                    // 逐字顯示
+                    dialogueText.textContent += textLines[lineIndex][charIndex];
+                    charIndex++;
+                    
+                    // 播放打字音效
+                    playTypeSound();
+                    
+                    typeWriterTimeout = setTimeout(typeWriter, 100);
+                } else {
+                    // 換行（最後一行不加換行）
+                    if (lineIndex < textLines.length - 1) {
+                        dialogueText.appendChild(document.createElement('br'));
+                    }
+                    lineIndex++;
+                    charIndex = 0;
+                    typeWriterTimeout = setTimeout(typeWriter, 500);
+                }
+            } else {
+                // 打字完成
+                isTyping = false;
+                if (quizSection) {
+                    quizSection.style.display = 'flex';
+                }
+            }
+        };
+
+        // 清除之前的計時器
+        if (typeWriterTimeout) {
+            clearTimeout(typeWriterTimeout);
+        }
+        typeWriter();
+    }
+
+    function playTypeSound() {
+        if (!typeSound) return;
+        typeSound.currentTime = 0;
+        typeSound.play().catch(e => console.error('打字音效播放失敗:', e));
+    }
+
+    // 大K老師介紹功能
+    if (teacherK) {
+        teacherK.addEventListener('click', () => {
+            if (!teacherIntroSection || !mainSection) return;
+            
+            // 停止當前打字效果
+            if (typeWriterTimeout) {
+                clearTimeout(typeWriterTimeout);
+                isTyping = false;
+            }
+            
+            mainSection.style.display = 'none';
+            teacherIntroSection.style.display = 'flex';
+            
+            // 添加歷史記錄以便瀏覽器返回按鈕工作
+            window.history.pushState({ page: 'teacher' }, '', '#teacher');
         });
     }
 
-    // 重置頁面狀態
-    function resetPage() {
-        const dialogueText = document.querySelector('.dialogue-text');
-        if (dialogueText) {
-            dialogueText.textContent = ''; // 清空對話框內容
-        }
-        if (mainSection) {
-            mainSection.style.display = 'none'; // 隱藏主內容區
-            mainSection.style.opacity = '0'; // 重置透明度
-            mainSection.classList.remove('active'); // 移除 active 類
-        }
-        if (forestAnimation) {
-            forestAnimation.style.display = 'flex'; // 顯示動畫區
-            forestAnimation.style.opacity = '1'; // 重置透明度
-        }
-    }
-
-    // 清除所有動態內容
-    function clearDynamicContent() {
-        const teacherSection = document.querySelector('.teacher-result-section');
-        if (teacherSection) {
-            teacherSection.style.display = 'none'; // 隱藏大K老師的對話框
-            teacherSection.style.opacity = '0'; // 重置透明度
-        }
-    }
-
-    // 打字機效果（分段顯示）
-    function startDialogue() {
-        const text = [
-            "歡迎來到潛意識財富森林！\n",
-            "我是潛意識無限學院的院長\n",
-            "～大K老師～\n",
-            "準備好探索你的金錢動物了嗎？"
-        ];
-        const dialogueText = document.querySelector('.dialogue-text');
-        if (dialogueText) {
-            // 清除之前的打字機效果
-            if (typeWriterTimeout) {
-                clearTimeout(typeWriterTimeout);
-                typeWriterTimeout = null;
-            }
-
-            dialogueText.textContent = ''; // 清空原有內容
-            let lineIndex = 0;
-            let charIndex = 0;
-
-            const typeWriter = () => {
-                if (lineIndex < text.length) {
-                    if (charIndex < text[lineIndex].length) {
-                        // 逐字顯示
-                        dialogueText.textContent += text[lineIndex].charAt(charIndex);
-                        charIndex++;
-                        const typeSound = document.getElementById('type-sound');
-                        if (typeSound) {
-                            typeSound.currentTime = 0; // 重置音效
-                            typeSound.play(); // 播放打字音效
-                        }
-                        typeWriterTimeout = setTimeout(typeWriter, 100); // 控制打字速度
-                    } else {
-                        // 換行並顯示下一段文字
-                        dialogueText.innerHTML += '<br>'; // 使用 <br> 換行
-                        lineIndex++;
-                        charIndex = 0;
-                        typeWriterTimeout = setTimeout(typeWriter, 500); // 換行後稍作停頓
-                    }
-                } else {
-                    // 顯示測驗按鈕
-                    const quizSection = document.getElementById('quiz-section');
-                    if (quizSection) {
-                        quizSection.style.display = 'flex';
-                    }
-                }
-            };
-            typeWriter();
-        }
-    }
-
-    // 獲取大K老師的圖像元素
-    const teacherK = document.querySelector('.character-img'); // 使用 class 選擇器
-    if (teacherK) {
-        teacherK.addEventListener('click', showTeacherIntro);
-    }
-
-    // 獲取「上一頁」按鈕元素
-    const backToIndexBtn = document.getElementById('back-to-index-btn');
     if (backToIndexBtn) {
-        backToIndexBtn.addEventListener('click', goBackToIndex);
+        backToIndexBtn.addEventListener('click', () => {
+            if (!teacherIntroSection || !mainSection) return;
+            
+            teacherIntroSection.style.display = 'none';
+            mainSection.style.display = 'flex';
+            
+            // 如果不是從動畫過來，重新開始對話
+            if (forestAnimation.style.display === 'none') {
+                startDialogue();
+            }
+            
+            window.history.pushState({ page: 'main' }, '', '#main');
+        });
     }
 
-    // 顯示大K老師的介紹
-    function showTeacherIntro() {
-        const teacherIntroSection = document.getElementById('teacher-intro-section');
-        const mainSection = document.getElementById('main-section');
-        if (teacherIntroSection && mainSection) {
-            mainSection.style.display = 'none'; // 隱藏主內容區
-            teacherIntroSection.style.display = 'flex'; // 顯示大K老師的介紹
+    // 處理瀏覽器返回按鈕
+    window.addEventListener('popstate', () => {
+        if (teacherIntroSection && teacherIntroSection.style.display === 'flex') {
+            backToIndexBtn.click();
         }
-    }
-
-    // 返回首頁
-    function goBackToIndex() {
-        const teacherIntroSection = document.getElementById('teacher-intro-section');
-        const mainSection = document.getElementById('main-section');
-        if (teacherIntroSection && mainSection) {
-            teacherIntroSection.style.display = 'none'; // 隱藏大K老師的介紹
-            mainSection.style.display = 'flex'; // 顯示主內容區
-        }
-    }
+    });
 
     // 音效處理
-    const bgMusic = document.getElementById('bg-music');
-    if (bgMusic) {
+    function initAudio() {
+        if (!bgMusic) return;
+        
         bgMusic.volume = 0.6;
-        bgMusic.play().catch(() => {
-            const audioPrompt = document.getElementById('audio-prompt');
+        bgMusic.play().catch(e => {
+            console.log('音效需要用戶交互後才能播放');
             if (audioPrompt) {
                 audioPrompt.style.display = 'block';
             }
         });
     }
 
+    // 點擊頁面啟用音效
     document.body.addEventListener('click', () => {
-        if (bgMusic) {
-            bgMusic.play().catch(console.error);
+        if (bgMusic && bgMusic.paused) {
+            bgMusic.play().catch(e => console.error('音效播放失敗:', e));
+            if (audioPrompt) {
+                audioPrompt.style.display = 'none';
+            }
         }
     });
+
+    // 初始化音效
+    initAudio();
 });
