@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0PBGZEXEG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L0PBGZEXEG');
+</script>
     <meta property="og:title" content="金錢動物測驗結果" />
     <meta property="og:description" content="{{ share_text }}" />
     <meta property="og:image" content="{{ url_for('static', filename='images/' + animal + '.jpg', _external=True) }}" />
